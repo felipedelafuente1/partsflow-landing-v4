@@ -99,6 +99,11 @@ body {
    ======================================== */
 
 @layer utilities {
+  /* Offset anchor scroll for fixed navbar (~72px height + breathing room) */
+  section[id] {
+    scroll-margin-top: 80px;
+  }
+
   .glass {
     background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(12px);
