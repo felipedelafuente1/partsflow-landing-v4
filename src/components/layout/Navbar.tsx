@@ -27,8 +27,10 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        scrolled ? "glass" : "bg-transparent"
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md border-b",
+        scrolled
+          ? "bg-black/80 border-white/10"
+          : "bg-black/60 border-white/[0.08]"
       )}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
@@ -75,7 +77,7 @@ export function Navbar() {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="glass md:hidden px-6 pb-6">
+        <div className="bg-black/90 backdrop-blur-md md:hidden px-6 pb-6">
           <div className="flex flex-col gap-4">
             {navLinks.map((link) => (
               <a
