@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partsflow · Dashboard Mensual</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Sora:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --azul:        #0A2540;
+  --azul-card:   #0f2d4a;
+  --azul-mid:    #1a3a5c;
+  --verde:       #00C47C;
+  --verde-dim:   rgba(0,196,124,0.10);
+  --verde-glow:  rgba(0,196,124,0.30);
+  --amarillo:    #FFB800;
+  --rojo:        #FF4D6A;
+  --texto:       #e8eef5;
+  --texto-dim:   #6a8aaa;
+  --borde:       rgba(255,255,255,0.07);
+  --card:        rgba(255,255,255,0.04);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  background:var(--azul);
+  color:var(--texto);
+  font-family:'Sora',sans-serif;
+  min-height:100vh;
+}
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 70% 40% at 5% 0%,rgba(0,196,124,0.07) 0%,transparent 60%),
+    radial-gradient(ellipse 50% 30% at 95% 100%,rgba(0,80,180,0.09) 0%,transparent 60%);
+  pointer-events:none;z-index:0;
+}
+.wrap{position:relative;z-index:1;max-width:1140px;margin:0 auto;padding:28px 24px 60px;}
+
+/* HEADER */
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;padding-bottom:18px;border-bottom:1px solid var(--borde);}
+.logo{display:flex;align-items:center;gap:10px;}
+.logo-dot{width:9px;height:9px;background:var(--verde);border-radius:50%;box-shadow:0 0 10px var(--verde-glow);animation:blink 2.5s ease-in-out infinite;}
+@keyframes blink{0%,100%{box-shadow:0 0 6px var(--verde-glow);}50%{box-shadow:0 0 18px var(--verde-glow);}}
+.logo-name{font-size:14px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;}
+.header-meta{text-align:right;}
+.header-mes{font-family:'DM Mono',monospace;font-size:15px;font-weight:500;color:var(--verde);}
+.header-sub{font-size:11px;color:var(--texto-dim);letter-spacing:.06em;text-transform:uppercase;margin-top:2px;}
+
+/* SECTION LABEL */
+.section-label{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--texto-dim);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.section-label::after{content:'';flex:1;height:1px;background:var(--borde);}
+
+/* STAT CARDS ROW */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px;}
+.stat-card{background:var(--card);border:1px solid var(--borde);border-radius:16px;padding:18px 18px 16px;position:relative;overflow:hidden;transition:border-color .2s;}
+.stat-card:hover{border-color:rgba(255,255,255,0.14);}
+.stat-card.alert{border-color:rgba(255,77,106,0.3);background:rgba(255,77,106,0.05);}
+.stat-card.good{border-color:rgba(0,196,124,0.2);background:rgba(0,196,124,0.04);}
+.stat-icon{font-size:16px;margin-bottom:10px;display:block;}
+.stat-label{font-size:11px;color:var(--texto-dim);margin-bottom:6px;line-height:1.4;}
+.stat-value{font-family:'DM Mono',monospace;font-size:28px;font-weight:500;color:var(--texto);line-height:1;}
+.stat-value.verde{color:var(--verde);}
+.stat-value.rojo{color:var(--rojo);}
+.stat-delta{display:inline-flex;align-items:center;gap:4px;font-family:'DM Mono',monospace;font-size:11px;margin-top:8px;padding:3px 8px;border-radius:20px;font-weight:500;}
+.delta-up{background:rgba(0,196,124,0.12);color:var(--verde);}
+.delta-down{background:rgba(255,77,106,0.12);color:var(--rojo);}
+.delta-neutral{background:rgba(255,255,255,0.06);color:var(--texto-dim);}
+.benchmark-tag{font-size:10px;color:var(--texto-dim);margin-top:4px;display:block;}
+.benchmark-tag span{color:var(--verde);}
+
+/* EMBUDO */
+.embudo-card{background:var(--card);border:1px solid var(--borde);border-radius:20px;padding:24px;margin-bottom:20px;}
+.embudo-row{display:flex;flex-wrap:nowrap;align-items:center;justify-content:space-between;}
+.embudo-etapa{text-align:center;padding:0 8px;}
+.etapa-num{font-family:'DM Mono',monospace;font-size:22px;font-weight:500;color:var(--texto);}
+.etapa-name{font-size:11px;color:var(--texto-dim);margin-top:4px;line-height:1.3;}
+.etapa-pct{font-size:11px;font-weight:600;margin-top:6px;padding:2px 8px;border-radius:20px;display:inline-block;}
+.pct-good{background:rgba(0,196,124,0.12);color:var(--verde);}
+.pct-warn{background:rgba(255,184,0,0.12);color:var(--amarillo);}
+.pct-bad{background:rgba(255,77,106,0.12);color:var(--rojo);}
+.embudo-arrow{text-align:center;color:var(--texto-dim);font-size:18px;padding:0 4px;}
+.embudo-arrow.drop{color:var(--rojo);}
+.caida-card{background:rgba(255,77,106,0.08);border:1px solid rgba(255,77,106,0.2);border-radius:12px;padding:14px 16px;margin-top:16px;display:flex;align-items:flex-start;gap:12px;}
+.caida-icon{font-size:18px;flex-shrink:0;margin-top:1px;}
+.caida-text{font-size:12px;color:var(--texto-dim);line-height:1.6;}
+.caida-text strong{color:var(--rojo);}
+
+/* INTELIGENCIA COMERCIAL */
+.intel-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:14px;margin-bottom:20px;}
+.intel-card{background:var(--card);border:1px solid var(--borde);border-radius:16px;padding:18px;}
+.intel-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--texto-dim);margin-bottom:14px;}
+.intel-list{display:flex;flex-direction:column;gap:9px;}
+.intel-item{display:flex;align-items:center;gap:8px;}
+.intel-rank{font-family:'DM Mono',monospace;font-size:11px;color:var(--texto-dim);width:16px;flex-shrink:0;}
+.intel-bar-wrap{flex:1;height:4px;background:rgba(255,255,255,0.06);border-radius:4px;overflow:hidden;}
+.intel-bar{height:100%;border-radius:4px;background:var(--verde);}
+.intel-bar.stock{background:var(--rojo);}
+.intel-bar.warn{background:var(--amarillo);}
+.intel-name{font-size:12px;color:var(--texto);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.intel-count{font-family:'DM Mono',monospace;font-size:11px;color:var(--texto-dim);flex-shrink:0;}
+
+/* ROI */
+.roi-grid{display:grid;grid-template-columns:260px 1fr;gap:14px;margin-bottom:20px;}
+.roi-main{background:var(--card);border:1px solid var(--borde);border-radius:20px;padding:24px;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;overflow:hidden;}
+.roi-main::after{content:'';position:absolute;bottom:-50px;left:50%;transform:translateX(-50%);width:200px;height:200px;background:radial-gradient(circle,var(--verde-glow) 0%,transparent 70%);pointer-events:none;}
+.roi-title{font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--texto-dim);margin-bottom:14px;}
+.gauge-wrap{position:relative;width:160px;height:88px;margin-bottom:8px;}
+.gauge-number{position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);font-family:'DM Mono',monospace;font-size:36px;font-weight:500;color:var(--verde);white-space:nowrap;text-shadow:0 0 24px var(--verde-glow);}
+.gauge-unit{font-size:16px;color:var(--texto-dim);}
+.roi-phrase{font-size:12px;color:var(--texto-dim);line-height:1.6;margin-top:14px;padding-top:14px;border-top:1px solid var(--borde);}
+.roi-phrase strong{color:var(--verde);font-family:'DM Mono',monospace;}
+
+/* Input */
+.roi-input-wrap{background:rgba(0,196,124,0.06);border:1px solid rgba(0,196,124,0.2);border-radius:12px;padding:10px 14px;margin-top:12px;width:100%;}
+.roi-input-label{font-size:10px;color:var(--verde);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;}
+.roi-input-field{display:flex;align-items:center;gap:4px;}
+.roi-input-field span{font-family:'DM Mono',monospace;font-size:16px;color:var(--texto-dim);}
+.roi-input-field input{background:transparent;border:none;outline:none;font-family:'DM Mono',monospace;font-size:20px;font-weight:500;color:var(--texto);width:100%;caret-color:var(--verde);}
+.roi-input-field input::placeholder{color:rgba(255,255,255,0.15);}
+
+.roi-desglose{display:flex;flex-direction:column;gap:10px;}
+.desg-card{background:var(--card);border:1px solid var(--borde);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;}
+.desg-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.icon-g{background:var(--verde-dim);}
+.icon-a{background:rgba(255,184,0,0.1);}
+.icon-b{background:rgba(0,120,255,0.1);}
+.desg-info{flex:1;}
+.desg-label{font-size:11px;color:var(--texto-dim);margin-bottom:3px;}
+.desg-val{font-family:'DM Mono',monospace;font-size:18px;font-weight:500;color:var(--texto);}
+.desg-val.g{color:var(--verde);}
+.desg-val.a{color:var(--amarillo);}
+.desg-sub{font-size:10px;color:var(--texto-dim);margin-top:1px;}
+
+/* CANCELACIONES + TENDENCIA */
+.bottom-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
+.donut-card{background:var(--card);border:1px solid var(--borde);border-radius:16px;padding:20px;}
+.card-title{font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--texto-dim);margin-bottom:16px;}
+.donut-inner{display:flex;align-items:center;gap:20px;}
+.donut-svg-wrap{position:relative;flex-shrink:0;}
+.donut-center-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;}
+.donut-n{font-family:'DM Mono',monospace;font-size:20px;font-weight:500;color:var(--texto);display:block;}
+.donut-l{font-size:9px;color:var(--texto-dim);display:block;}
+.legend{display:flex;flex-direction:column;gap:8px;flex:1;}
+.leg-item{display:flex;align-items:center;gap:8px;}
+.leg-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.leg-name{font-size:11px;color:var(--texto-dim);flex:1;}
+.leg-pct{font-family:'DM Mono',monospace;font-size:12px;color:var(--texto);}
+
+.trend-card{background:var(--card);border:1px solid var(--borde);border-radius:16px;padding:20px;}
+.trend-chart{height:80px;margin-bottom:8px;}
+.trend-chart svg{width:100%;height:100%;overflow:visible;}
+.trend-labels{display:flex;justify-content:space-between;}
+.trend-label{font-family:'DM Mono',monospace;font-size:11px;color:var(--texto-dim);text-align:center;}
+.trend-label.now{color:var(--verde);}
+.bench-row{display:flex;gap:10px;margin-top:14px;}
+.bench-item{flex:1;background:rgba(255,255,255,0.03);border:1px solid var(--borde);border-radius:10px;padding:10px 12px;}
+.bench-label{font-size:10px;color:var(--texto-dim);margin-bottom:4px;}
+.bench-vals{display:flex;align-items:baseline;gap:6px;}
+.bench-yo{font-family:'DM Mono',monospace;font-size:16px;font-weight:500;color:var(--texto);}
+.bench-ref{font-family:'DM Mono',monospace;font-size:11px;color:var(--texto-dim);}
+.bench-tag{font-size:9px;padding:2px 6px;border-radius:20px;margin-top:3px;display:inline-block;}
+.above{background:rgba(0,196,124,0.12);color:var(--verde);}
+.below{background:rgba(255,77,106,0.12);color:var(--rojo);}
+
+/* INSIGHT */
+.insight{background:var(--verde-dim);border:1px solid rgba(0,196,124,0.18);border-radius:14px;padding:14px 20px;display:flex;align-items:center;gap:14px;}
+.insight-icon{font-size:20px;flex-shrink:0;}
+.insight-text{font-size:12px;color:var(--texto-dim);line-height:1.6;}
+.insight-text strong{color:var(--verde);}
+
+/* Animations */
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.section-block{animation:fadeUp .45s ease both;}
+.s1{animation-delay:.05s;}.s2{animation-delay:.12s;}.s3{animation-delay:.19s;}.s4{animation-delay:.26s;}.s5{animation-delay:.33s;}.s6{animation-delay:.40s;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HEADER -->
+  <div class="header section-block s1">
+    <div class="logo">
+      <div class="logo-dot"></div>
+      <span class="logo-name">Partsflow</span>
+    </div>
+    <div class="header-meta">
+      <div class="header-mes">Febrero 2026</div>
+      <div class="header-sub">Reporte mensual · Dueños y Gerentes</div>
+    </div>
+  </div>
+
+  <!-- 1. VISIÓN DEL CANAL -->
+  <div class="section-block s2">
+    <div class="section-label">1 · Visión del canal digital</div>
+    <div class="stats-row">
+      <div class="stat-card">
+        <span class="stat-icon">💬</span>
+        <div class="stat-label">Conversaciones recibidas</div>
+        <div class="stat-value">1.284</div>
+        <span class="stat-delta delta-up">↑ 12% vs enero</span>
+        <span class="benchmark-tag">Promedio PF: <span>980</span></span>
+      </div>
+      <div class="stat-card good">
+        <span class="stat-icon">🎯</span>
+        <div class="stat-label">Solicitudes reales (Julia)</div>
+        <div class="stat-value verde">743</div>
+        <span class="stat-delta delta-up">↑ 8% vs enero</span>
+        <span class="benchmark-tag">Promedio PF: <span>610</span></span>
+      </div>
+      <div class="stat-card good">
+        <span class="stat-icon">✅</span>
+        <div class="stat-label">Solicitudes gestionadas</div>
+        <div class="stat-value verde">681</div>
+        <span class="stat-delta delta-neutral">92% del total</span>
+        <span class="benchmark-tag">Promedio PF: <span>88%</span></span>
+      </div>
+      <div class="stat-card alert">
+        <span class="stat-icon">⚠️</span>
+        <div class="stat-label">Sin gestionar</div>
+        <div class="stat-value rojo">62</div>
+        <span class="stat-delta delta-down">↑ 18% vs enero</span>
+        <span class="benchmark-tag">Promedio PF: <span>42 sin gestionar</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. EMBUDO KANBAN -->
+  <div class="section-block s3">
+    <div class="section-label">2 · Embudo del canal · dónde se cae la venta</div>
+    <div class="embudo-card">
+      <div class="embudo-row">
+        <div class="embudo-etapa">
+          <div class="etapa-num">743</div>
+          <div class="etapa-name">Solicitudes</div>
+          <span class="etapa-pct pct-good">100%</span>
+        </div>
+        <div class="embudo-arrow">→</div>
+        <div class="embudo-etapa">
+          <div class="etapa-num">681</div>
+          <div class="etapa-name">Cotización enviada</div>
+          <span class="etapa-pct pct-good">92%</span>
+        </div>
+        <div class="embudo-arrow">→</div>
+        <div class="embudo-etapa">
+          <div class="etapa-num">298</div>
+          <div class="etapa-name">Posible venta</div>
+          <span class="etapa-pct pct-warn">44%</span>
+        </div>
+        <div class="embudo-arrow drop">→</div>
+        <div class="embudo-etapa">
+          <div class="etapa-num">89</div>
+          <div class="etapa-name">Venta por gestionar</div>
+          <span class="etapa-pct pct-bad">30%</span>
+        </div>
+        <div class="embudo-arrow">→</div>
+        <div class="embudo-etapa">
+          <div class="etapa-num">84</div>
+          <div class="etapa-name">Venta finalizada</div>
+          <span class="etapa-pct pct-good">94%</span>
+        </div>
+      </div>
+      <div class="caida-card">
+        <div class="caida-icon">🔴</div>
+        <div class="caida-text">
+          <strong>Mayor caída: Posible Venta → Venta por Gestionar (30%)</strong><br>
+          De 298 clientes que mostraron interés, solo 89 llegaron a pagar. El equipo está perdiendo seguimiento en esta etapa. Revisar con el jefe de ventas cuántos chats en "Posible Venta" llevan más de 24 horas sin movimiento.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. INTELIGENCIA COMERCIAL -->
+  <div class="section-block s4">
+    <div class="section-label">3 · Inteligencia comercial · qué pide el mercado</div>
+    <div class="intel-grid">
+
+      <div class="intel-card">
+        <div class="intel-title">🚗 Top marcas solicitadas</div>
+        <div class="intel-list">
+          <div class="intel-item"><span class="intel-rank">1</span><span class="intel-name">Toyota</span><div class="intel-bar-wrap"><div class="intel-bar" style="width:100%"></div></div><span class="intel-count">187</span></div>
+          <div class="intel-item"><span class="intel-rank">2</span><span class="intel-name">Hyundai</span><div class="intel-bar-wrap"><div class="intel-bar" style="width:78%"></div></div><span class="intel-count">146</span></div>
+          <div class="intel-item"><span class="intel-rank">3</span><span class="intel-name">Nissan</span><div class="intel-bar-wrap"><div class="intel-bar" style="width:61%"></div></div><span class="intel-count">114</span></div>
+          <div class="intel-item"><span class="intel-rank">4</span><span class="intel-name">Kia</span><div class="intel-bar-wrap"><div class="intel-bar" style="width:48%"></div></div><span class="intel-count">90</span></div>
+          <div class="intel-item"><span class="intel-rank">5</span><span class="intel-name">Suzuki</span><div class="intel-bar-wrap"><div class="intel-bar" style="width:36%"></div></div><span class="intel-count">67</span></div>
+        </div>
+      </div>
+
+      <div class="intel-card">
+        <div class="intel-title">🔩 Top repuestos solicitados</div>
+        <div class="intel-list">
+          <div class="intel-item"><span class="intel-rank">1</span><span class="intel-name">Amortiguador del.</span><div class="intel-bar-wrap"><div class="intel-bar" style="width:100%"></div></div><span class="intel-count">94</span></div>
+          <div class="intel-item"><span class="intel-rank">2</span><span class="intel-name">Pastillas de freno</span><div class="intel-bar-wrap"><div class="intel-bar" style="width:82%"></div></div><span class="intel-count">77</span></div>
+          <div class="intel-item"><span class="intel-rank">3</span><span class="intel-name">Radiador de agua</span><div class="intel-bar-wrap"><div class="intel-bar" style="width:63%"></div></div><span class="intel-count">59</span></div>
+          <div class="intel-item"><span class="intel-rank">4</span><span class="intel-name">Motor de arranque</span><div class="intel-bar-wrap"><div class="intel-bar" style="width:48%"></div></div><span class="intel-count">45</span></div>
+          <div class="intel-item"><span class="intel-rank">5</span><span class="intel-name">Parachoque trasero</span><div class="intel-bar-wrap"><div class="intel-bar" style="width:37%"></div></div><span class="intel-count">35</span></div>
+        </div>
+      </div>
+
+      <div class="intel-card">
+        <div class="intel-title">❌ Sin stock más solicitados</div>
+        <div class="intel-list">
+          <div class="intel-item"><span class="intel-rank">1</span><span class="intel-name">Turbo Nissan NP300</span><div class="intel-bar-wrap"><div class="intel-bar stock" style="width:100%"></div></div><span class="intel-count">28</span></div>
+          <div class="intel-item"><span class="intel-rank">2</span><span class="intel-name">Amort. Brilliance V3</span><div class="intel-bar-wrap"><div class="intel-bar stock" style="width:71%"></div></div><span class="intel-count">20</span></div>
+          <div class="intel-item"><span class="intel-rank">3</span><span class="intel-name">Evaporador Hyundai</span><div class="intel-bar-wrap"><div class="intel-bar stock" style="width:54%"></div></div><span class="intel-count">15</span></div>
+          <div class="intel-item"><span class="intel-rank">4</span><span class="intel-name">Capot Toyota Yaris</span><div class="intel-bar-wrap"><div class="intel-bar stock" style="width:39%"></div></div><span class="intel-count">11</span></div>
+          <div class="intel-item"><span class="intel-rank">5</span><span class="intel-name">Piola embrague Daihatsu</span><div class="intel-bar-wrap"><div class="intel-bar stock" style="width:25%"></div></div><span class="intel-count">7</span></div>
+        </div>
+      </div>
+
+      <div class="intel-card">
+        <div class="intel-title">📉 Marcas bajo % cotización</div>
+        <div class="intel-list">
+          <div class="intel-item"><span class="intel-rank">1</span><span class="intel-name">Brilliance</span><div class="intel-bar-wrap"><div class="intel-bar warn" style="width:100%"></div></div><span class="intel-count">22%</span></div>
+          <div class="intel-item"><span class="intel-rank">2</span><span class="intel-name">Ssangyong</span><div class="intel-bar-wrap"><div class="intel-bar warn" style="width:77%"></div></div><span class="intel-count">28%</span></div>
+          <div class="intel-item"><span class="intel-rank">3</span><span class="intel-name">Daihatsu</span><div class="intel-bar-wrap"><div class="intel-bar warn" style="width:60%"></div></div><span class="intel-count">31%</span></div>
+          <div class="intel-item" style="margin-top:10px;padding-top:10px;border-top:1px solid var(--borde);">
+            <span style="font-size:10px;color:var(--texto-dim);line-height:1.5;">Bajo 35% = problema de stock o proveedor. Revisar con el equipo de compras.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 4. ROI -->
+  <div class="section-block s5">
+    <div class="section-label">4 · ROI del canal digital</div>
+    <div class="roi-grid">
+      <div class="roi-main">
+        <div class="roi-title">Retorno sobre inversión</div>
+        <div class="gauge-wrap">
+          <svg viewBox="0 0 160 80" width="160" height="80">
+            <path d="M10,80 A70,70 0 0,1 150,80" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="10" stroke-linecap="round"/>
+            <path id="gf" d="M10,80 A70,70 0 0,1 150,80" fill="none" stroke="var(--verde)" stroke-width="10" stroke-linecap="round"
+              stroke-dasharray="220" stroke-dashoffset="220" style="transition:stroke-dashoffset .8s cubic-bezier(.4,0,.2,1),stroke .4s"/>
+            <circle id="gd" cx="10" cy="80" r="5.5" fill="var(--verde)" style="transition:all .8s cubic-bezier(.4,0,.2,1);filter:drop-shadow(0 0 5px var(--verde-glow))"/>
+          </svg>
+          <div class="gauge-number" id="roi-n">—<span class="gauge-unit">x</span></div>
+        </div>
+        <div class="roi-phrase" id="roi-p">Ingresa tus ventas del canal para ver el ROI</div>
+        <div class="roi-input-wrap">
+          <div class="roi-input-label">Ventas del canal este mes</div>
+          <div class="roi-input-field">
+            <span>$</span>
+            <input type="text" placeholder="0" id="v-input" oninput="calc()"/>
+          </div>
+        </div>
+      </div>
+
+      <div class="roi-desglose">
+        <div class="desg-card">
+          <div class="desg-icon icon-g">⏱️</div>
+          <div class="desg-info">
+            <div class="desg-label">Tiempo ahorrado por Julia este mes</div>
+            <div class="desg-val g">69 horas</div>
+            <div class="desg-sub">412 solicitudes gestionadas × 10 min de búsqueda manual evitada</div>
+          </div>
+        </div>
+        <div class="desg-card">
+          <div class="desg-icon icon-a">💰</div>
+          <div class="desg-info">
+            <div class="desg-label">Ahorro operacional en horas-vendedor</div>
+            <div class="desg-val a">$345.000</div>
+            <div class="desg-sub">69 hrs × $5.000 costo hora promedio · tiempo devuelto al equipo</div>
+          </div>
+        </div>
+        <div class="desg-card">
+          <div class="desg-icon icon-b">📈</div>
+          <div class="desg-info">
+            <div class="desg-label">Ventas atribuidas al canal digital</div>
+            <div class="desg-val" id="v-show">—</div>
+            <div class="desg-sub">Ingresado por ti · ventas cerradas desde WhatsApp este mes</div>
+          </div>
+        </div>
+        <div class="desg-card">
+          <div class="desg-icon icon-g">🧮</div>
+          <div class="desg-info">
+            <div class="desg-label">Valor total generado (ventas + ahorro)</div>
+            <div class="desg-val g" id="v-total">—</div>
+            <div class="desg-sub">vs. inversión mensual $490.000 en Partsflow</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. COMPARATIVAS -->
+  <div class="section-block s6">
+    <div class="section-label">5 · Comparativas · tendencia y benchmark</div>
+    <div class="bottom-grid">
+
+      <div class="trend-card">
+        <div class="card-title">Tendencia ROI · últimos 3 meses</div>
+        <div class="trend-chart">
+          <svg viewBox="0 0 400 80" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="lg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#00C47C" stop-opacity="0.25"/>
+                <stop offset="100%" stop-color="#00C47C" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <line x1="0" y1="20" x2="400" y2="20" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+            <line x1="0" y1="50" x2="400" y2="50" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+            <path d="M40,62 C140,55 260,30 360,14 L360,80 L40,80 Z" fill="url(#lg)"/>
+            <path d="M40,62 C140,55 260,30 360,14" fill="none" stroke="#00C47C" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="40"  cy="62" r="4" fill="#00C47C" opacity="0.4"/>
+            <circle cx="200" cy="38" r="4" fill="#00C47C" opacity="0.6"/>
+            <circle cx="360" cy="14" r="6" fill="#00C47C" style="filter:drop-shadow(0 0 6px rgba(0,196,124,.8))"/>
+            <text x="40"  y="56" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="10" font-family="DM Mono">2.1x</text>
+            <text x="200" y="32" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="10" font-family="DM Mono">3.4x</text>
+            <text x="360" y="8"  text-anchor="middle" fill="#00C47C" font-size="11" font-family="DM Mono" font-weight="500" id="roi-trend">—</text>
+          </svg>
+        </div>
+        <div class="trend-labels">
+          <span class="trend-label">Diciembre</span>
+          <span class="trend-label">Enero</span>
+          <span class="trend-label now">Febrero ✦</span>
+        </div>
+        <div class="bench-row">
+          <div class="bench-item">
+            <div class="bench-label">% Conversión sol. → coti.</div>
+            <div class="bench-vals">
+              <span class="bench-yo">92%</span>
+              <span class="bench-ref">PF avg 88%</span>
+            </div>
+            <span class="bench-tag above">↑ Sobre promedio</span>
+          </div>
+          <div class="bench-item">
+            <div class="bench-label">Tiempo resp. promedio</div>
+            <div class="bench-vals">
+              <span class="bench-yo">48 min</span>
+              <span class="bench-ref">PF avg 35 min</span>
+            </div>
+            <span class="bench-tag below">↓ Bajo promedio</span>
+          </div>
+          <div class="bench-item">
+            <div class="bench-label">% Posible venta → pago</div>
+            <div class="bench-vals">
+              <span class="bench-yo">30%</span>
+              <span class="bench-ref">PF avg 41%</span>
+            </div>
+            <span class="bench-tag below">↓ Bajo promedio</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="donut-card">
+        <div class="card-title">Razones de cancelación · 248 pedidos</div>
+        <div class="donut-inner">
+          <div class="donut-svg-wrap">
+            <svg viewBox="0 0 110 110" width="110" height="110">
+              <circle cx="55" cy="55" r="42" fill="none" stroke="#FF4D6A" stroke-width="13"
+                stroke-dasharray="143 264" stroke-dashoffset="66" stroke-linecap="round" transform="rotate(-90 55 55)"/>
+              <circle cx="55" cy="55" r="42" fill="none" stroke="#FFB800" stroke-width="13"
+                stroke-dasharray="82 264" stroke-dashoffset="-80" stroke-linecap="round" transform="rotate(-90 55 55)"/>
+              <circle cx="55" cy="55" r="42" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="13"
+                stroke-dasharray="26 264" stroke-dashoffset="-165" stroke-linecap="round" transform="rotate(-90 55 55)"/>
+              <circle cx="55" cy="55" r="42" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="13"
+                stroke-dasharray="13 264" stroke-dashoffset="-194" stroke-linecap="round" transform="rotate(-90 55 55)"/>
+            </svg>
+            <div class="donut-center-text">
+              <span class="donut-n">248</span>
+              <span class="donut-l">cancelados</span>
+            </div>
+          </div>
+          <div class="legend">
+            <div class="leg-item"><div class="leg-dot" style="background:#FF4D6A"></div><span class="leg-name">Sin Stock</span><span class="leg-pct">54%</span></div>
+            <div class="leg-item"><div class="leg-dot" style="background:#FFB800"></div><span class="leg-name">Sin Respuesta cliente</span><span class="leg-pct">31%</span></div>
+            <div class="leg-item"><div class="leg-dot" style="background:rgba(255,255,255,0.18)"></div><span class="leg-name">Precio Alto</span><span class="leg-pct">10%</span></div>
+            <div class="leg-item"><div class="leg-dot" style="background:rgba(255,255,255,0.07)"></div><span class="leg-name">Otros</span><span class="leg-pct">5%</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- INSIGHT -->
+  <div class="insight section-block s6">
+    <div class="insight-icon">🤖</div>
+    <div class="insight-text" id="insight">
+      Este mes Julia gestionó <strong>412 solicitudes</strong> sin que tus vendedores buscaran datos del auto.
+      Eso son <strong>69 horas devueltas</strong> a tu equipo — tiempo que usaron para cerrar ventas, no para buscar patentes.
+    </div>
+  </div>
+
+</div>
+
+<script>
+function fmt(n){return '$'+Math.round(n).toLocaleString('es-CL');}
+function calc(){
+  const raw=document.getElementById('v-input').value.replace(/\D/g,'');
+  const ventas=parseInt(raw)||0;
+  const julia=412,costo=490000,costoH=5000,minS=10;
+  const horas=Math.round((julia*minS)/60);
+  const ahorro=horas*costoH;
+  const total=ventas+ahorro;
+  const roi=total>0?(total/costo):0;
+  document.getElementById('v-show').textContent=ventas>0?fmt(ventas):'—';
+  document.getElementById('v-total').textContent=ventas>0?fmt(total):'—';
+  if(ventas>0){
+    document.getElementById('roi-n').innerHTML=roi.toFixed(1)+'<span class="gauge-unit">x</span>';
+    document.getElementById('roi-trend').textContent=roi.toFixed(1)+'x';
+    document.getElementById('roi-p').innerHTML='Por cada <strong>$1</strong> invertido en Partsflow, generaste <strong style="color:var(--verde)">$'+roi.toFixed(1)+'</strong> en retorno combinado.';
+    const color=roi<1.5?'#FF4D6A':roi<3?'#FFB800':'#00C47C';
+    const pct=Math.min(roi/10,1);
+    const off=220-(220*pct);
+    document.getElementById('gf').style.strokeDashoffset=off;
+    document.getElementById('gf').style.stroke=color;
+    document.getElementById('gd').style.fill=color;
+    document.getElementById('roi-n').style.color=color;
+    const angle=Math.PI-(Math.PI*pct);
+    document.getElementById('gd').setAttribute('cx',80+70*Math.cos(angle));
+    document.getElementById('gd').setAttribute('cy',80+70*Math.sin(angle));
+  } else {
+    document.getElementById('roi-n').innerHTML='—<span class="gauge-unit">x</span>';
+    document.getElementById('roi-n').style.color='var(--verde)';
+    document.getElementById('roi-p').textContent='Ingresa tus ventas del canal para ver el ROI';
+  }
+}
+document.getElementById('v-input').addEventListener('input',function(){
+  const raw=this.value.replace(/\D/g,'');
+  if(raw) this.value=parseInt(raw).toLocaleString('es-CL');
+  calc();
+});
+</script>
+</body>
+</html>
