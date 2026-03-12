@@ -76,7 +76,7 @@ const companyLogos = [
 
 function LogoItem({ name, img }: { name: string; img: string }) {
   return (
-    <div className="group flex h-16 w-40 shrink-0 items-center justify-center px-6">
+    <div className="group flex h-16 w-28 shrink-0 items-center justify-center px-3 sm:w-40 sm:px-6">
       <Image
         src={img}
         alt={name}
@@ -107,7 +107,7 @@ export function LogoCloud() {
             <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-24 bg-gradient-to-l from-black to-transparent" />
 
             {/* Scrolling row */}
-            <div className="flex animate-[marquee_40s_linear_infinite] hover:[animation-play-state:paused]">
+            <div className="flex animate-[marquee_18s_linear_infinite] hover:[animation-play-state:paused]">
               {companyLogos.map((logo) => (
                 <LogoItem key={logo.name} name={logo.name} img={logo.img} />
               ))}
