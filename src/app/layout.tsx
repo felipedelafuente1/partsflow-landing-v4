@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { WhatsAppWidget } from "@/components/ui/WhatsAppWidget";
 
 export const metadata: Metadata = {
   title: "Partsflow | Automatización Inteligente de Ventas para Autopartes",
@@ -20,6 +21,7 @@ export default function RootLayout({
     <html lang="es" className="dark">
       <body className="font-sans antialiased bg-background text-foreground">
         {children}
+        <WhatsAppWidget />
       </body>
     </html>
   );

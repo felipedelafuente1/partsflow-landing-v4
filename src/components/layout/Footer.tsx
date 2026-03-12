@@ -7,7 +7,7 @@ import { MessageCircle } from "lucide-react";
 
 function Badge({ children, href }: { children: React.ReactNode; href?: string }) {
   const cls =
-    "group inline-flex items-center gap-2 rounded-lg border border-white/[0.07] bg-white/[0.03] px-3.5 py-2.5 grayscale opacity-50 transition-all duration-300 hover:grayscale-0 hover:opacity-100 hover:border-white/15 cursor-default";
+    "group inline-flex items-center gap-2 rounded-lg border border-white/[0.08] bg-white/[0.04] px-3.5 py-2.5 grayscale opacity-60 transition-all duration-300 hover:grayscale-0 hover:opacity-100 hover:border-white/20 cursor-default";
   if (href) {
     return (
       <a href={href} target="_blank" rel="noopener noreferrer" className={cls}>
@@ -23,7 +23,6 @@ function Badge({ children, href }: { children: React.ReactNode; href?: string })
 function MetaBadge() {
   return (
     <Badge>
-      {/* Meta ∞ symbol approximation */}
       <svg width="18" height="12" viewBox="0 0 18 12" fill="none">
         <path
           d="M2 6C2 3.79 3.34 2 5 2C6.1 2 7 2.9 9 5.5C11 2.9 11.9 2 13 2C14.66 2 16 3.79 16 6C16 8.21 14.66 10 13 10C11.9 10 11 9.1 9 6.5C7 9.1 6.1 10 5 10C3.34 10 2 8.21 2 6Z"
@@ -43,7 +42,6 @@ function MetaBadge() {
 function GoogleBadge() {
   return (
     <Badge>
-      {/* Multicolor G */}
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
         <path d="M13 7.15c0-.46-.04-.9-.11-1.32H7v2.5h3.37A2.88 2.88 0 0 1 9 10.13v1.5h1.97C12.26 10.44 13 8.95 13 7.15z" fill="#4285F4"/>
         <path d="M7 13c1.7 0 3.12-.56 4.16-1.52l-1.97-1.5C8.63 10.6 7.88 10.84 7 10.84c-1.64 0-3.03-1.1-3.53-2.58H1.44v1.55A6 6 0 0 0 7 13z" fill="#34A853"/>
@@ -61,7 +59,13 @@ function GoogleBadge() {
 function PlatanusBadge() {
   return (
     <Badge>
-      <span className="text-base leading-none">🌱</span>
+      <Image
+        src="/platanus-logo.png"
+        alt="Platanus Ventures"
+        width={20}
+        height={20}
+        className="h-5 w-5 rounded-sm object-contain"
+      />
       <span className="leading-none">
         <span className="block text-[11px] font-semibold italic text-white tracking-tight">platanus</span>
         <span className="block text-[9px] text-white/60 tracking-wide">ventures</span>
@@ -73,10 +77,13 @@ function PlatanusBadge() {
 function DrivenBadge() {
   return (
     <Badge>
-      {/* Play-triangle */}
-      <svg width="10" height="12" viewBox="0 0 10 12" fill="none">
-        <path d="M0 0L10 6L0 12V0Z" fill="white" fillOpacity="0.9" />
-      </svg>
+      <Image
+        src="/driven-vc-logo.jpeg"
+        alt="Driven VC"
+        width={20}
+        height={20}
+        className="h-5 w-5 rounded-sm object-contain"
+      />
       <span className="leading-none">
         <span className="block text-[11px] font-bold text-white tracking-tight">
           driven<span className="font-normal text-white/50">.vc</span>
@@ -103,23 +110,22 @@ function MarcaChileBadge() {
 
 export function Footer() {
   return (
-    <footer className="relative bg-black">
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+    <footer className="relative bg-zinc-950 border-t border-white/10">
 
       {/* Top Row: HQ address */}
-      <div className="border-b border-white/[0.06] py-3 text-center">
-        <span className="text-[10px] tracking-widest text-white/25 uppercase">
+      <div className="border-b border-white/[0.08] py-3.5 text-center">
+        <span className="text-xs tracking-widest text-zinc-400 uppercase">
           🇨🇱&nbsp;&nbsp;HQ · Eliodoro Yañez 2990, Providencia, Santiago de Chile
         </span>
       </div>
 
       {/* Trust Grid */}
-      <div className="mx-auto max-w-5xl px-6 py-12">
+      <div className="mx-auto max-w-5xl px-6 py-16">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-3">
 
           {/* Partners */}
           <div>
-            <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.18em] text-white/25">
+            <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.18em] text-slate-400">
               Partners
             </p>
             <div className="flex flex-col gap-2.5 items-start">
@@ -130,7 +136,7 @@ export function Footer() {
 
           {/* Backed By */}
           <div>
-            <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.18em] text-white/25">
+            <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.18em] text-slate-400">
               Backed By
             </p>
             <div className="flex flex-col gap-2.5 items-start">
@@ -141,19 +147,19 @@ export function Footer() {
 
           {/* Hecho en + Brand */}
           <div>
-            <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.18em] text-white/25">
+            <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.18em] text-slate-400">
               Hecho en
             </p>
             <MarcaChileBadge />
 
             {/* Brand mark below */}
             <div className="mt-8 flex items-center gap-2">
-              <Image src="/logo.png" alt="Partsflow" width={22} height={22} className="h-[22px] w-[22px] opacity-70" />
-              <span className="text-sm font-bold tracking-tight text-white/50">
-                Parts<span className="text-mint-400/70">flow</span>
+              <Image src="/logo.png" alt="Partsflow" width={22} height={22} className="h-[22px] w-[22px]" />
+              <span className="text-sm font-bold tracking-tight text-white">
+                Parts<span className="text-mint-400">flow</span>
               </span>
             </div>
-            <p className="mt-1.5 text-[11px] text-white/30 leading-snug">
+            <p className="mt-1.5 text-[11px] text-zinc-400 leading-snug">
               Vende repuestos mientras duermes.
             </p>
           </div>
@@ -161,15 +167,15 @@ export function Footer() {
       </div>
 
       {/* Bottom Row */}
-      <div className="border-t border-white/[0.06]">
+      <div className="border-t border-white/[0.08]">
         <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4 px-6 py-5">
-          <span className="text-[11px] text-white/25">
+          <span className="text-[11px] text-zinc-500">
             © 2026 Partsflow AI
           </span>
           <div className="flex items-center gap-6">
             <a
               href="#"
-              className="text-[11px] text-white/25 transition-colors hover:text-white/50"
+              className="text-[11px] text-zinc-500 transition-colors hover:text-zinc-300"
             >
               Términos y Condiciones
             </a>

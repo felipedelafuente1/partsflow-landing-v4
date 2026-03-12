@@ -2,44 +2,9 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { MessageSquare, Cpu, Moon, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { FadeUp } from "@/components/animations/FadeUp";
-
-const cases = [
-  {
-    icon: MessageSquare,
-    logo: "🏢",
-    category: "Dealership Multimarca",
-    headline: "+40% Conversión de Ventas",
-    problem:
-      "Gestionaban 3.000+ chats mensuales con 2 vendedores. Las respuestas tardaban horas y perdían deals por falta de seguimiento.",
-    metric: "3.000+ chats/mes sin personal extra",
-    metricSub: "0 contrataciones adicionales",
-    accentColor: "mint" as const,
-  },
-  {
-    icon: Cpu,
-    logo: "⚙️",
-    category: "Especialista en Importados",
-    headline: "Identificación OEM/VIN Instantánea",
-    problem:
-      "Sus vendedores perdían 15 min por consulta buscando códigos OEM y VIN manualmente. Errores frecuentes en pedidos.",
-    metric: "< 3 seg por identificación",
-    metricSub: "−92% errores en pedidos",
-    accentColor: "electric" as const,
-  },
-  {
-    icon: Moon,
-    logo: "🌙",
-    category: "Repuestos After-Hours",
-    headline: "30% de Ventas Fuera del Horario",
-    problem:
-      "Cerraban a las 18:00 y perdían todas las consultas nocturnas. Sin sistema, esas ventas iban a la competencia.",
-    metric: "30% de ventas capturadas",
-    metricSub: "24/7 sin guardia humana",
-    accentColor: "purple" as const,
-  },
-];
+import { casos, getCasoHref, isFullCase } from "@/lib/casos";
 
 const accentMap = {
   mint: {
@@ -94,13 +59,15 @@ export function CasosDeExito() {
 
         {/* Bento Grid — 3 cols */}
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {cases.map((c, i) => {
+          {casos.map((c, i) => {
             const accent = accentMap[c.accentColor];
             const Icon = c.icon;
+            const href = getCasoHref(c);
+            const full = isFullCase(c);
 
             return (
-              <FadeUp key={c.category} delay={i * 0.12}>
-                <Link href="/casos" className="block h-full">
+              <FadeUp key={c.id} delay={i * 0.12}>
+                <Link href={href} className="block h-full">
                   <motion.div
                     className="group relative flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-6 overflow-hidden cursor-pointer"
                     whileHover={{ y: -4, transition: { duration: 0.2 } }}
@@ -148,7 +115,7 @@ export function CasosDeExito() {
 
                     {/* CTA link */}
                     <div className="mt-4 flex items-center gap-1.5 text-xs text-white/30 transition-colors group-hover:text-white/60">
-                      Ver caso completo
+                      {full ? "Ver caso completo" : "Ver todos los casos"}
                       <ArrowRight size={12} className="transition-transform group-hover:translate-x-1" />
                     </div>
                   </motion.div>

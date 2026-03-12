@@ -10,6 +10,7 @@ import { useBookingModal } from "@/context/BookingModalContext";
 const navLinks = [
   { label: "Producto", href: "#producto" },
   { label: "Beneficios", href: "#beneficios" },
+  { label: "Casos de Éxito", href: "/casos" },
   { label: "Precios", href: "#precios" },
   { label: "Contacto", href: "#contacto" },
 ];
@@ -46,13 +47,13 @@ export function Navbar() {
         {/* Desktop Links */}
         <div className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className="text-sm text-muted transition-colors hover:text-foreground"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </div>
 
@@ -60,7 +61,7 @@ export function Navbar() {
         <div className="hidden md:block">
           <button
             onClick={openModal}
-            className="inline-flex items-center justify-center rounded-full bg-mint-400 px-5 py-2.5 text-sm font-semibold text-black transition-all hover:bg-mint-300 hover:shadow-[0_0_20px_rgba(74,222,128,0.3)]"
+            className="inline-flex cursor-pointer items-center justify-center rounded-full bg-mint-400 px-5 py-2.5 text-sm font-semibold text-black transition-all hover:bg-mint-300 hover:shadow-[0_0_20px_rgba(74,222,128,0.3)]"
           >
             Solicitar Demo
           </button>
@@ -81,21 +82,21 @@ export function Navbar() {
         <div className="bg-black/90 backdrop-blur-md md:hidden px-6 pb-6">
           <div className="flex flex-col gap-4">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
                 className="text-sm text-muted transition-colors hover:text-foreground"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
             <button
               onClick={() => {
                 openModal();
                 setMobileOpen(false);
               }}
-              className="inline-flex items-center justify-center rounded-full bg-mint-400 px-5 py-2.5 text-sm font-semibold text-black transition-all hover:bg-mint-300"
+              className="inline-flex cursor-pointer items-center justify-center rounded-full bg-mint-400 px-5 py-2.5 text-sm font-semibold text-black transition-all hover:bg-mint-300"
             >
               Solicitar Demo
             </button>
