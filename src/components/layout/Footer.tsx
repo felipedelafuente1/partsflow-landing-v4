@@ -1,88 +1,188 @@
 "use client";
 
 import Image from "next/image";
-import { MessageCircle, Mail } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 
-const quickLinks = [
-  { label: "Producto", href: "#producto" },
-  { label: "Beneficios", href: "#beneficios" },
-  { label: "Control Tower", href: "#control-tower" },
-  { label: "FAQ", href: "#faq" },
-];
+/* ── Partner badge component ── */
+
+function Badge({ children, href }: { children: React.ReactNode; href?: string }) {
+  const cls =
+    "group inline-flex items-center gap-2 rounded-lg border border-white/[0.07] bg-white/[0.03] px-3.5 py-2.5 grayscale opacity-50 transition-all duration-300 hover:grayscale-0 hover:opacity-100 hover:border-white/15 cursor-default";
+  if (href) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" className={cls}>
+        {children}
+      </a>
+    );
+  }
+  return <div className={cls}>{children}</div>;
+}
+
+/* ── Typographic logo badges ── */
+
+function MetaBadge() {
+  return (
+    <Badge>
+      {/* Meta ∞ symbol approximation */}
+      <svg width="18" height="12" viewBox="0 0 18 12" fill="none">
+        <path
+          d="M2 6C2 3.79 3.34 2 5 2C6.1 2 7 2.9 9 5.5C11 2.9 11.9 2 13 2C14.66 2 16 3.79 16 6C16 8.21 14.66 10 13 10C11.9 10 11 9.1 9 6.5C7 9.1 6.1 10 5 10C3.34 10 2 8.21 2 6Z"
+          stroke="#1877F2"
+          strokeWidth="1.5"
+          fill="none"
+        />
+      </svg>
+      <span className="leading-none">
+        <span className="block text-[11px] font-bold text-white tracking-tight">Meta</span>
+        <span className="block text-[9px] text-white/60 tracking-wide">Tech Provider</span>
+      </span>
+    </Badge>
+  );
+}
+
+function GoogleBadge() {
+  return (
+    <Badge>
+      {/* Multicolor G */}
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path d="M13 7.15c0-.46-.04-.9-.11-1.32H7v2.5h3.37A2.88 2.88 0 0 1 9 10.13v1.5h1.97C12.26 10.44 13 8.95 13 7.15z" fill="#4285F4"/>
+        <path d="M7 13c1.7 0 3.12-.56 4.16-1.52l-1.97-1.5C8.63 10.6 7.88 10.84 7 10.84c-1.64 0-3.03-1.1-3.53-2.58H1.44v1.55A6 6 0 0 0 7 13z" fill="#34A853"/>
+        <path d="M3.47 8.26A3.6 3.6 0 0 1 3.28 7c0-.44.08-.87.19-1.26V4.19H1.44A6 6 0 0 0 1 7c0 .97.23 1.88.44 2.81l2.03-1.55z" fill="#FBBC05"/>
+        <path d="M7 3.16c.93 0 1.76.32 2.41.95l1.81-1.81A6 6 0 0 0 7 1a6 6 0 0 0-5.56 3.19l2.03 1.55C3.97 4.26 5.36 3.16 7 3.16z" fill="#EA4335"/>
+      </svg>
+      <span className="leading-none">
+        <span className="block text-[11px] font-bold text-white tracking-tight">Google</span>
+        <span className="block text-[9px] text-white/60 tracking-wide">for Startups</span>
+      </span>
+    </Badge>
+  );
+}
+
+function PlatanusBadge() {
+  return (
+    <Badge>
+      <span className="text-base leading-none">🌱</span>
+      <span className="leading-none">
+        <span className="block text-[11px] font-semibold italic text-white tracking-tight">platanus</span>
+        <span className="block text-[9px] text-white/60 tracking-wide">ventures</span>
+      </span>
+    </Badge>
+  );
+}
+
+function DrivenBadge() {
+  return (
+    <Badge>
+      {/* Play-triangle */}
+      <svg width="10" height="12" viewBox="0 0 10 12" fill="none">
+        <path d="M0 0L10 6L0 12V0Z" fill="white" fillOpacity="0.9" />
+      </svg>
+      <span className="leading-none">
+        <span className="block text-[11px] font-bold text-white tracking-tight">
+          driven<span className="font-normal text-white/50">.vc</span>
+        </span>
+        <span className="block text-[9px] text-white/60 tracking-wide">early stage</span>
+      </span>
+    </Badge>
+  );
+}
+
+function MarcaChileBadge() {
+  return (
+    <Badge>
+      <span className="text-base leading-none">🇨🇱</span>
+      <span className="leading-none">
+        <span className="block text-[11px] font-semibold text-white tracking-tight">Marca Chile</span>
+        <span className="block text-[9px] text-white/60 tracking-wide">Hecho en Chile</span>
+      </span>
+    </Badge>
+  );
+}
+
+/* ── Main Footer ── */
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-white/5 bg-black">
-      <div className="mx-auto max-w-7xl px-6 py-16">
-        <div className="grid grid-cols-1 gap-12 sm:grid-cols-3">
-          {/* Col 1: Brand */}
-          <div className="flex flex-col gap-4">
-            <a href="#" className="flex items-center gap-2.5">
-              <Image src="/logo.png" alt="Partsflow" width={28} height={28} className="h-7 w-7" />
-              <span className="text-lg font-bold tracking-tight text-foreground">
-                Parts<span className="text-mint-400">flow</span>
+    <footer className="relative bg-black">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
+      {/* Top Row: HQ address */}
+      <div className="border-b border-white/[0.06] py-3 text-center">
+        <span className="text-[10px] tracking-widest text-white/25 uppercase">
+          🇨🇱&nbsp;&nbsp;HQ · Eliodoro Yañez 2990, Providencia, Santiago de Chile
+        </span>
+      </div>
+
+      {/* Trust Grid */}
+      <div className="mx-auto max-w-5xl px-6 py-12">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-3">
+
+          {/* Partners */}
+          <div>
+            <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.18em] text-white/25">
+              Partners
+            </p>
+            <div className="flex flex-col gap-2.5 items-start">
+              <MetaBadge />
+              <GoogleBadge />
+            </div>
+          </div>
+
+          {/* Backed By */}
+          <div>
+            <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.18em] text-white/25">
+              Backed By
+            </p>
+            <div className="flex flex-col gap-2.5 items-start">
+              <PlatanusBadge />
+              <DrivenBadge />
+            </div>
+          </div>
+
+          {/* Hecho en + Brand */}
+          <div>
+            <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.18em] text-white/25">
+              Hecho en
+            </p>
+            <MarcaChileBadge />
+
+            {/* Brand mark below */}
+            <div className="mt-8 flex items-center gap-2">
+              <Image src="/logo.png" alt="Partsflow" width={22} height={22} className="h-[22px] w-[22px] opacity-70" />
+              <span className="text-sm font-bold tracking-tight text-white/50">
+                Parts<span className="text-mint-400/70">flow</span>
               </span>
-            </a>
-            <p className="max-w-[200px] text-sm text-white/40 leading-relaxed">
+            </div>
+            <p className="mt-1.5 text-[11px] text-white/30 leading-snug">
               Vende repuestos mientras duermes.
             </p>
-            {/* Social proof dot */}
-            <div className="flex items-center gap-2 text-xs text-white/30">
-              <span className="h-1.5 w-1.5 rounded-full bg-mint-400 animate-pulse" />
-              27+ empresas activas
-            </div>
-          </div>
-
-          {/* Col 2: Quick links */}
-          <div>
-            <p className="mb-5 text-xs font-medium uppercase tracking-widest text-white/30">
-              Links rápidos
-            </p>
-            <ul className="flex flex-col gap-3">
-              {quickLinks.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-sm text-white/50 transition-colors hover:text-mint-400"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Col 3: Contact */}
-          <div>
-            <p className="mb-5 text-xs font-medium uppercase tracking-widest text-white/30">
-              Contacto
-            </p>
-            <div className="flex flex-col gap-4">
-              <a
-                href="mailto:hola@partsflow.ai"
-                className="flex items-center gap-2.5 text-sm text-white/50 transition-colors hover:text-mint-400"
-              >
-                <Mail size={15} className="text-mint-400/60" />
-                hola@partsflow.ai
-              </a>
-              <a
-                href="https://wa.me/56900000000?text=Hola%2C%20quiero%20saber%20más%20sobre%20Partsflow"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-xl border border-mint-400/20 bg-mint-400/5 px-4 py-2.5 text-sm font-medium text-mint-400 transition-all hover:bg-mint-400/10 hover:border-mint-400/40"
-              >
-                <MessageCircle size={15} />
-                Escríbenos por WhatsApp
-              </a>
-            </div>
           </div>
         </div>
+      </div>
 
-        {/* Divider */}
-        <div className="mt-14 border-t border-white/5 pt-8 text-center">
-          <p className="text-xs text-white/25">
-            © 2026 Partsflow AI. Hecho con ❤️ en Santiago, Chile.
-          </p>
+      {/* Bottom Row */}
+      <div className="border-t border-white/[0.06]">
+        <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4 px-6 py-5">
+          <span className="text-[11px] text-white/25">
+            © 2026 Partsflow AI
+          </span>
+          <div className="flex items-center gap-6">
+            <a
+              href="#"
+              className="text-[11px] text-white/25 transition-colors hover:text-white/50"
+            >
+              Términos y Condiciones
+            </a>
+            <a
+              href="https://wa.me/56900000000?text=Hola%2C%20quiero%20saber%20más%20sobre%20Partsflow"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-[11px] font-medium text-mint-400/70 transition-colors hover:text-mint-400"
+            >
+              <MessageCircle size={12} />
+              WhatsApp
+            </a>
+          </div>
         </div>
       </div>
     </footer>
