@@ -6,6 +6,7 @@ import { Agitacion } from "@/components/sections/Agitacion";
 import { LogoCloud } from "@/components/sections/LogoCloud";
 import { EightyTwenty } from "@/components/sections/EightyTwenty";
 import { ControlTower } from "@/components/sections/ControlTower";
+import { Ecosistema } from "@/components/sections/Ecosistema";
 import { CasosDeExito } from "@/components/sections/CasosDeExito";
 import { Precios } from "@/components/sections/Precios";
 import { FAQ } from "@/components/sections/FAQ";
@@ -23,6 +24,7 @@ export default function Home() {
         <Agitacion />
         <EightyTwenty />
         <ControlTower />
+        <Ecosistema />
         <CasosDeExito />
         <Precios />
         <FAQ />
