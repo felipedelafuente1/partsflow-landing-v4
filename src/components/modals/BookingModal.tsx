@@ -107,24 +107,24 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
 
           {/* Modal Content */}
           <motion.div
-            className="relative z-10 mx-2 my-4 w-full max-w-lg rounded-2xl border border-white/10 bg-[#09090b] shadow-2xl sm:mx-auto sm:my-[10vh]"
+            className="relative z-10 mx-0 my-0 w-full max-w-lg overflow-hidden rounded-2xl border border-white/10 bg-[#09090b] shadow-2xl sm:mx-auto sm:my-[10vh]"
             initial={{ opacity: 0, scale: 0.96, y: 16 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 16 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close button */}
+            {/* Close button — floating over content */}
             <button
               onClick={onClose}
-              className="absolute right-4 top-4 z-10 rounded-lg p-1.5 text-muted/60 transition-colors hover:bg-white/5 hover:text-foreground"
+              className="absolute right-3 top-3 z-20 rounded-full bg-black/60 p-1.5 text-white/70 backdrop-blur-sm transition-colors hover:bg-black/80 hover:text-white"
               aria-label="Cerrar"
             >
               <X size={18} />
             </button>
 
             {/* Step content with AnimatePresence */}
-            <div className="p-6 sm:p-8">
+            <div className={step === 1 ? "p-6 sm:p-8" : "p-0"}>
               <AnimatePresence mode="wait">
                 {step === 1 ? (
                   <motion.div
@@ -306,30 +306,21 @@ function StepOneForm({
 
 function StepTwoCalendar({ onBack }: { onBack: () => void }) {
   return (
-    <div>
-      {/* Header */}
-      <div className="mb-6 flex items-center gap-3">
-        <button
-          onClick={onBack}
-          className="rounded-lg p-1.5 text-muted/60 transition-colors hover:bg-white/5 hover:text-foreground"
-          aria-label="Volver"
-        >
-          <ArrowLeft size={18} />
-        </button>
-        <div>
-          <h2 className="text-xl font-bold text-foreground sm:text-2xl">
-            Elige un horario
-          </h2>
-          <p className="mt-0.5 text-sm text-muted/70">
-            Selecciona el día y hora que más te acomode.
-          </p>
-        </div>
-      </div>
+    <div className="relative">
+      {/* Back button — floating top-left */}
+      <button
+        onClick={onBack}
+        className="absolute left-3 top-3 z-20 rounded-full bg-black/60 p-1.5 text-white/70 backdrop-blur-sm transition-colors hover:bg-black/80 hover:text-white"
+        aria-label="Volver"
+      >
+        <ArrowLeft size={18} />
+      </button>
 
-      {/* Calendar iframe */}
+      {/* Calendar iframe — full width, no padding, maximized height */}
       <iframe
         src={CALENDAR_URL}
-        className="h-[450px] w-full rounded-lg border-0 sm:h-[550px]"
+        className="h-[700px] w-full border-0"
+        style={{ filter: "brightness(0.92)" }}
         title="Agendar Demo Partsflow"
         allow="camera; microphone"
       />
