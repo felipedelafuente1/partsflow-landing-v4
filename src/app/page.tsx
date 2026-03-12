@@ -6,6 +6,7 @@ import { LogoCloud } from "@/components/sections/LogoCloud";
 import { EightyTwenty } from "@/components/sections/EightyTwenty";
 import { ControlTower } from "@/components/sections/ControlTower";
 import { CasosDeExito } from "@/components/sections/CasosDeExito";
+import { Precios } from "@/components/sections/Precios";
 import { FAQ } from "@/components/sections/FAQ";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { Footer } from "@/components/layout/Footer";
@@ -21,6 +22,7 @@ export default function Home() {
         <EightyTwenty />
         <ControlTower />
         <CasosDeExito />
+        <Precios />
         <FAQ />
         <FinalCTA />
         <Footer />

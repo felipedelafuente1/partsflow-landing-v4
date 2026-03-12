@@ -8,11 +8,11 @@ import { Menu, X } from "lucide-react";
 import { useBookingModal } from "@/context/BookingModalContext";
 
 const navLinks = [
-  { label: "Producto", href: "#producto" },
-  { label: "Beneficios", href: "#beneficios" },
+  { label: "Producto", href: "/#producto" },
+  { label: "Beneficios", href: "/#beneficios" },
   { label: "Casos de Éxito", href: "/casos" },
-  { label: "Precios", href: "#precios" },
-  { label: "Contacto", href: "#contacto" },
+  { label: "Precios", href: "/#precios" },
+  { label: "Contacto", href: "/#contacto" },
 ];
 
 export function Navbar() {

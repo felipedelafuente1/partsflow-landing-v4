@@ -153,7 +153,7 @@ function ROIGauge({ roi, hasEntered }: { roi: number; hasEntered: boolean }) {
 
 function FunnelCard() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
+  const isInView = useInView(sectionRef, { once: true, margin: "0px" });
 
   const counts = [
     useCountUp({ end: 743, duration: 1600 }),
@@ -218,7 +218,7 @@ function FunnelCard() {
 
 function TopBrandsCard() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const isInView = useInView(ref, { once: true, margin: "0px" });
 
   return (
     <div ref={ref} className="rounded-2xl border border-white/5 bg-white/[0.03] p-6 flex flex-col gap-4 h-full">
@@ -256,7 +256,7 @@ function TopBrandsCard() {
 
 function StockShortageCard() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const isInView = useInView(ref, { once: true, margin: "0px" });
 
   return (
     <div ref={ref} className="rounded-2xl border border-red-500/20 bg-red-500/[0.04] p-6 flex flex-col gap-4 h-full">
@@ -300,7 +300,7 @@ function StockShortageCard() {
 
 function ROICalculatorCard() {
   const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardRef, { once: true, margin: "-80px" });
+  const isInView = useInView(cardRef, { once: true, margin: "0px" });
   const [hasEntered, setHasEntered] = useState(false);
 
   const [rawInput, setRawInput] = useState(DEFAULT_SALES.toLocaleString("es-CL"));

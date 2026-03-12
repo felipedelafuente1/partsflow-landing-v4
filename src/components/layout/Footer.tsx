@@ -120,15 +120,16 @@ export function Footer() {
       </div>
 
       {/* Trust Grid */}
-      <div className="mx-auto max-w-5xl px-6 py-16">
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-3">
+      <div className="mx-auto max-w-5xl px-6 py-10 sm:py-16">
+        {/* Mobile: 2 cols (Partners | Backed By), then full-width brand. Desktop: 3 cols */}
+        <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 sm:gap-10">
 
           {/* Partners */}
           <div>
-            <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.18em] text-slate-400">
+            <p className="mb-3 text-[10px] font-medium uppercase tracking-[0.18em] text-slate-400">
               Partners
             </p>
-            <div className="flex flex-col gap-2.5 items-start">
+            <div className="flex flex-col gap-2 items-start">
               <MetaBadge />
               <GoogleBadge />
             </div>
@@ -136,58 +137,62 @@ export function Footer() {
 
           {/* Backed By */}
           <div>
-            <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.18em] text-slate-400">
+            <p className="mb-3 text-[10px] font-medium uppercase tracking-[0.18em] text-slate-400">
               Backed By
             </p>
-            <div className="flex flex-col gap-2.5 items-start">
+            <div className="flex flex-col gap-2 items-start">
               <PlatanusBadge />
               <DrivenBadge />
             </div>
           </div>
 
-          {/* Hecho en + Brand */}
-          <div>
-            <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.18em] text-slate-400">
+          {/* Hecho en + Brand — full width on mobile, 1 col on desktop */}
+          <div className="col-span-2 sm:col-span-1 border-t border-white/[0.06] pt-6 sm:border-0 sm:pt-0">
+            <p className="mb-3 text-[10px] font-medium uppercase tracking-[0.18em] text-slate-400">
               Hecho en
             </p>
             <MarcaChileBadge />
 
-            {/* Brand mark below */}
-            <div className="mt-8 flex items-center gap-2">
-              <Image src="/logo.png" alt="Partsflow" width={22} height={22} className="h-[22px] w-[22px]" />
-              <span className="text-sm font-bold tracking-tight text-white">
-                Parts<span className="text-mint-400">flow</span>
-              </span>
+            {/* Brand mark — centered on mobile, left on desktop */}
+            <div className="mt-6 flex flex-col items-center sm:items-start gap-0.5">
+              <div className="flex items-center gap-2">
+                <Image src="/logo.png" alt="Partsflow" width={22} height={22} className="h-[22px] w-[22px]" />
+                <span className="text-sm font-bold tracking-tight text-white">
+                  Parts<span className="text-mint-400">flow</span>
+                </span>
+              </div>
+              <p className="text-[11px] text-zinc-400 leading-snug">
+                Vende repuestos mientras duermes.
+              </p>
             </div>
-            <p className="mt-1.5 text-[11px] text-zinc-400 leading-snug">
-              Vende repuestos mientras duermes.
-            </p>
           </div>
         </div>
       </div>
 
       {/* Bottom Row */}
       <div className="border-t border-white/[0.08]">
-        <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4 px-6 py-5">
-          <span className="text-[11px] text-zinc-500">
-            © 2026 Partsflow AI
-          </span>
-          <div className="flex items-center gap-6">
-            <a
-              href="#"
-              className="text-[11px] text-zinc-500 transition-colors hover:text-zinc-300"
-            >
-              Términos y Condiciones
-            </a>
-            <a
-              href="https://wa.me/56900000000?text=Hola%2C%20quiero%20saber%20más%20sobre%20Partsflow"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-[11px] font-medium text-mint-400/70 transition-colors hover:text-mint-400"
-            >
-              <MessageCircle size={12} />
-              WhatsApp
-            </a>
+        <div className="mx-auto max-w-5xl px-6 py-4 pr-20 sm:pr-6">
+          <div className="flex flex-col gap-1.5 sm:flex-row sm:items-center sm:justify-between">
+            <span className="text-[11px] text-zinc-500">
+              © 2026 Partsflow AI
+            </span>
+            <div className="flex items-center gap-5">
+              <a
+                href="#"
+                className="text-[11px] text-zinc-500 transition-colors hover:text-zinc-300"
+              >
+                Términos y Condiciones
+              </a>
+              <a
+                href="https://wa.me/56900000000?text=Hola%2C%20quiero%20saber%20más%20sobre%20Partsflow"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-[11px] font-medium text-mint-400/70 transition-colors hover:text-mint-400"
+              >
+                <MessageCircle size={12} />
+                WhatsApp
+              </a>
+            </div>
           </div>
         </div>
       </div>
