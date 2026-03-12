@@ -69,6 +69,11 @@
   30% { opacity: 1; transform: translateY(-4px); }
 }
 
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 /* ========================================
    Base Styles
    ======================================== */
