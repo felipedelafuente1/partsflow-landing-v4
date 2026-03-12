@@ -4,6 +4,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Hero } from "@/components/sections/Hero";
 import { LogoCloud } from "@/components/sections/LogoCloud";
 import { EightyTwenty } from "@/components/sections/EightyTwenty";
+import { ControlTower } from "@/components/sections/ControlTower";
 import { BookingModalProvider } from "@/context/BookingModalContext";
 
 export default function Home() {
@@ -14,6 +15,7 @@ export default function Home() {
         <Hero />
         <LogoCloud />
         <EightyTwenty />
+        <ControlTower />
       </main>
     </BookingModalProvider>
   );
