@@ -4,8 +4,11 @@ import { FadeUp } from "@/components/animations/FadeUp";
 import { RetroGrid } from "@/components/ui/retro-grid";
 import { WhatsAppSimulator } from "@/components/sections/WhatsAppSimulator";
 import { ArrowRight, Play } from "lucide-react";
+import { useBookingModal } from "@/context/BookingModalContext";
 
 export function Hero() {
+  const { openModal } = useBookingModal();
+
   return (
     <section className="relative min-h-screen overflow-hidden bg-background pt-24 pb-20">
       {/* Background Effects */}
@@ -56,8 +59,8 @@ export function Hero() {
           {/* CTAs */}
           <FadeUp delay={0.3}>
             <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
-              <a
-                href="#contacto"
+              <button
+                onClick={openModal}
                 className="group inline-flex items-center gap-2 rounded-full bg-mint-400 px-8 py-3.5 text-sm font-semibold text-black transition-all hover:bg-mint-300 hover:shadow-[0_0_30px_rgba(74,222,128,0.3)]"
               >
                 Comenzar Ahora
@@ -65,14 +68,14 @@ export function Hero() {
                   size={16}
                   className="transition-transform group-hover:translate-x-1"
                 />
-              </a>
-              <a
-                href="#demo"
+              </button>
+              <button
+                onClick={openModal}
                 className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-8 py-3.5 text-sm font-medium text-foreground transition-all hover:border-white/20 hover:bg-white/[0.06]"
               >
                 <Play size={14} />
                 Ver Demo
-              </a>
+              </button>
             </div>
           </FadeUp>
 
