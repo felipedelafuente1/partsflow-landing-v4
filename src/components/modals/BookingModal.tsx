@@ -107,7 +107,7 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
 
           {/* Modal Content */}
           <motion.div
-            className={`relative z-10 mx-0 my-0 w-full max-w-lg overflow-hidden rounded-2xl border shadow-2xl sm:mx-auto sm:my-[10vh] ${step === 1 ? "border-white/10 bg-[#09090b]" : "border-gray-200 bg-[#f3f4f6]"}`}
+            className={`relative z-10 mx-0 my-0 w-full overflow-hidden rounded-2xl border shadow-2xl sm:mx-auto sm:my-[10vh] ${step === 1 ? "max-w-lg border-white/10 bg-[#09090b]" : "max-w-4xl border-gray-200 bg-[#f3f4f6]"}`}
             initial={{ opacity: 0, scale: 0.96, y: 16 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 16 }}
@@ -316,12 +316,12 @@ function StepTwoCalendar({ onBack }: { onBack: () => void }) {
         <ArrowLeft size={18} />
       </button>
 
-      {/* Clip Google header — hide name/photo/duration, show "Selecciona una hora" */}
-      <div className="overflow-hidden rounded-xl border border-[#e5e7eb]" style={{ height: "600px" }}>
+      {/* Clipper: overflow-hidden crops top (header) and bottom (legal) */}
+      <div className="relative w-full overflow-hidden rounded-b-xl border border-[#e5e7eb] h-[600px] md:h-[650px]">
         <iframe
           src={CALENDAR_URL}
           className="w-full border-0"
-          style={{ height: "740px", marginTop: "-140px" }}
+          style={{ height: "850px", marginTop: "-130px", marginBottom: "-100px" }}
           title="Agendar Demo Partsflow"
           allow="camera; microphone"
         />
