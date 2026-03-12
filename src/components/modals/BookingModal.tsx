@@ -316,12 +316,12 @@ function StepTwoCalendar({ onBack }: { onBack: () => void }) {
         <ArrowLeft size={18} />
       </button>
 
-      {/* Clip Google header by using negative margin + overflow hidden */}
-      <div className="overflow-hidden rounded-xl">
+      {/* Clip Google header — hide name/photo/duration, show "Selecciona una hora" */}
+      <div className="overflow-hidden rounded-xl border border-[#e5e7eb]" style={{ height: "600px" }}>
         <iframe
           src={CALENDAR_URL}
           className="w-full border-0"
-          style={{ height: "770px", marginTop: "-120px" }}
+          style={{ height: "740px", marginTop: "-140px" }}
           title="Agendar Demo Partsflow"
           allow="camera; microphone"
         />
