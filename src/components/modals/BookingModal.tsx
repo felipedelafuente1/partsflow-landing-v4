@@ -107,17 +107,17 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
 
           {/* Modal Content */}
           <motion.div
-            className="relative z-10 mx-0 my-0 w-full max-w-lg overflow-hidden rounded-2xl border border-white/10 bg-[#09090b] shadow-2xl sm:mx-auto sm:my-[10vh]"
+            className={`relative z-10 mx-0 my-0 w-full max-w-lg overflow-hidden rounded-2xl border shadow-2xl sm:mx-auto sm:my-[10vh] ${step === 1 ? "border-white/10 bg-[#09090b]" : "border-gray-200 bg-[#f3f4f6]"}`}
             initial={{ opacity: 0, scale: 0.96, y: 16 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 16 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close button — floating over content */}
+            {/* Close button — adapts to step background */}
             <button
               onClick={onClose}
-              className="absolute right-3 top-3 z-20 rounded-full bg-black/60 p-1.5 text-white/70 backdrop-blur-sm transition-colors hover:bg-black/80 hover:text-white"
+              className={`absolute right-3 top-3 z-20 rounded-full p-1.5 backdrop-blur-sm transition-colors ${step === 1 ? "bg-black/60 text-white/70 hover:bg-black/80 hover:text-white" : "bg-white/80 text-gray-500 hover:bg-white hover:text-gray-800"}`}
               aria-label="Cerrar"
             >
               <X size={18} />
@@ -307,23 +307,25 @@ function StepOneForm({
 function StepTwoCalendar({ onBack }: { onBack: () => void }) {
   return (
     <div className="relative">
-      {/* Back button — floating top-left */}
+      {/* Back button — dark on light background */}
       <button
         onClick={onBack}
-        className="absolute left-3 top-3 z-20 rounded-full bg-black/60 p-1.5 text-white/70 backdrop-blur-sm transition-colors hover:bg-black/80 hover:text-white"
+        className="absolute left-3 top-3 z-20 rounded-full bg-white/80 p-1.5 text-gray-500 backdrop-blur-sm transition-colors hover:bg-white hover:text-gray-800"
         aria-label="Volver"
       >
         <ArrowLeft size={18} />
       </button>
 
-      {/* Calendar iframe — full width, no padding, maximized height */}
-      <iframe
-        src={CALENDAR_URL}
-        className="h-[700px] w-full border-0"
-        style={{ filter: "brightness(0.92)" }}
-        title="Agendar Demo Partsflow"
-        allow="camera; microphone"
-      />
+      {/* Clip Google header by using negative margin + overflow hidden */}
+      <div className="overflow-hidden rounded-xl">
+        <iframe
+          src={CALENDAR_URL}
+          className="w-full border-0"
+          style={{ height: "770px", marginTop: "-120px" }}
+          title="Agendar Demo Partsflow"
+          allow="camera; microphone"
+        />
+      </div>
     </div>
   );
 }
