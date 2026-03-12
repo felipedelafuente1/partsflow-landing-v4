@@ -321,7 +321,7 @@ function StepTwoCalendar({ onBack }: { onBack: () => void }) {
         <iframe
           src={CALENDAR_URL}
           className="w-full border-0"
-          style={{ height: "850px", marginTop: "-130px", marginBottom: "-100px" }}
+          style={{ height: "850px", marginTop: "0px", marginBottom: "-100px" }}
           title="Agendar Demo Partsflow"
           allow="camera; microphone"
         />
