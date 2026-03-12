@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+/* ========================================
+   Partsflow Brand System — Tailwind v4
+   ======================================== */
+
+@theme inline {
+  /* Brand Colors */
+  --color-mint-50: #eefbf0;
+  --color-mint-100: #d4f5dc;
+  --color-mint-200: #a8ebba;
+  --color-mint-300: #7de197;
+  --color-mint-400: #4ade80;
+  --color-mint-500: #22c55e;
+  --color-mint-600: #16a34a;
+  --color-mint-700: #15803d;
+  --color-mint-800: #166534;
+  --color-mint-900: #14532d;
+
+  --color-electric-400: #60a5fa;
+  --color-electric-500: #3b82f6;
+  --color-electric-600: #2563eb;
+
+  --color-purple-400: #a78bfa;
+  --color-purple-500: #8b5cf6;
+  --color-purple-600: #7c3aed;
+
+  /* Surfaces */
+  --color-background: #000000;
+  --color-foreground: #fafafa;
+  --color-muted: #a1a1aa;
+  --color-surface: #0a0a0a;
+  --color-surface-light: #141414;
+  --color-border: #1f1f1f;
+
+  /* Typography */
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+
+  /* Custom Animations */
+  --animate-fade-up: fade-up 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  --animate-glow-pulse: glow-pulse 3s ease-in-out infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-border-beam: border-beam 4s linear infinite;
+}
+
+/* Keyframes */
+@keyframes fade-up {
+  0% { opacity: 0; transform: translateY(24px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 30px rgba(74, 222, 128, 0.1), 0 0 60px rgba(74, 222, 128, 0.05); }
+  50% { box-shadow: 0 0 50px rgba(74, 222, 128, 0.2), 0 0 100px rgba(74, 222, 128, 0.1); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes border-beam {
+  0% { offset-distance: 0%; }
+  100% { offset-distance: 100%; }
+}
+
+@keyframes typing-dot {
+  0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-4px); }
+}
+
+/* ========================================
+   Base Styles
+   ======================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #000;
+  color: #fafafa;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #000; }
+::-webkit-scrollbar-thumb { background: #1a1a1a; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #333; }
+
+/* ========================================
+   Utility Classes
+   ======================================== */
+
+@layer utilities {
+  .glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .text-gradient-mint {
+    background: linear-gradient(135deg, #4ade80, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-purple {
+    background: linear-gradient(135deg, #a78bfa, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glow-mint {
+    box-shadow: 0 0 40px rgba(74, 222, 128, 0.15), 0 0 80px rgba(74, 222, 128, 0.08);
+  }
+
+  .glow-mint-strong {
+    box-shadow: 0 0 60px rgba(74, 222, 128, 0.2), 0 0 120px rgba(74, 222, 128, 0.1), 0 0 200px rgba(74, 222, 128, 0.05);
+  }
+
+  .glow-purple {
+    box-shadow: 0 0 40px rgba(139, 92, 246, 0.12), 0 0 80px rgba(139, 92, 246, 0.06);
+  }
+}
