@@ -6,6 +6,9 @@ import { LogoCloud } from "@/components/sections/LogoCloud";
 import { EightyTwenty } from "@/components/sections/EightyTwenty";
 import { ControlTower } from "@/components/sections/ControlTower";
 import { CasosDeExito } from "@/components/sections/CasosDeExito";
+import { FAQ } from "@/components/sections/FAQ";
+import { FinalCTA } from "@/components/sections/FinalCTA";
+import { Footer } from "@/components/layout/Footer";
 import { BookingModalProvider } from "@/context/BookingModalContext";
 
 export default function Home() {
@@ -18,6 +21,9 @@ export default function Home() {
         <EightyTwenty />
         <ControlTower />
         <CasosDeExito />
+        <FAQ />
+        <FinalCTA />
+        <Footer />
       </main>
     </BookingModalProvider>
   );
