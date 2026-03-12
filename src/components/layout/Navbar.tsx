@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import { useBookingModal } from "@/context/BookingModalContext";
@@ -33,9 +34,7 @@ export function Navbar() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         {/* Logo */}
         <a href="#" className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-mint-400/10 border border-mint-400/20">
-            <span className="text-mint-400 font-bold text-sm">P</span>
-          </div>
+          <Image src="/logo.png" alt="Partsflow" width={32} height={32} className="h-8 w-8" />
           <span className="text-xl font-bold tracking-tight text-foreground">
             Parts<span className="text-mint-400">flow</span>
           </span>
