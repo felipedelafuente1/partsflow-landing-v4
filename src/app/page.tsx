@@ -2,6 +2,7 @@
 
 import { Navbar } from "@/components/layout/Navbar";
 import { Hero } from "@/components/sections/Hero";
+import { Agitacion } from "@/components/sections/Agitacion";
 import { LogoCloud } from "@/components/sections/LogoCloud";
 import { EightyTwenty } from "@/components/sections/EightyTwenty";
 import { ControlTower } from "@/components/sections/ControlTower";
@@ -19,6 +20,7 @@ export default function Home() {
         <Navbar />
         <Hero />
         <LogoCloud />
+        <Agitacion />
         <EightyTwenty />
         <ControlTower />
         <CasosDeExito />
