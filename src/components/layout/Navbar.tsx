@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
+import { useBookingModal } from "@/context/BookingModalContext";
 
 const navLinks = [
   { label: "Producto", href: "#producto" },
@@ -14,6 +15,7 @@ const navLinks = [
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { openModal } = useBookingModal();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -54,12 +56,12 @@ export function Navbar() {
 
         {/* CTA */}
         <div className="hidden md:block">
-          <a
-            href="#contacto"
+          <button
+            onClick={openModal}
             className="inline-flex items-center justify-center rounded-full bg-mint-400 px-5 py-2.5 text-sm font-semibold text-black transition-all hover:bg-mint-300 hover:shadow-[0_0_20px_rgba(74,222,128,0.3)]"
           >
             Solicitar Demo
-          </a>
+          </button>
         </div>
 
         {/* Mobile Toggle */}
@@ -86,12 +88,15 @@ export function Navbar() {
                 {link.label}
               </a>
             ))}
-            <a
-              href="#contacto"
+            <button
+              onClick={() => {
+                openModal();
+                setMobileOpen(false);
+              }}
               className="inline-flex items-center justify-center rounded-full bg-mint-400 px-5 py-2.5 text-sm font-semibold text-black transition-all hover:bg-mint-300"
             >
               Solicitar Demo
-            </a>
+            </button>
           </div>
         </div>
       )}
