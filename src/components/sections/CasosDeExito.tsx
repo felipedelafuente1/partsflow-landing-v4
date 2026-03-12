@@ -1,7 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { MessageSquare, Cpu, Moon } from "lucide-react";
+import { MessageSquare, Cpu, Moon, ArrowRight } from "lucide-react";
 import { FadeUp } from "@/components/animations/FadeUp";
 
 const cases = [
@@ -99,51 +100,59 @@ export function CasosDeExito() {
 
             return (
               <FadeUp key={c.category} delay={i * 0.12}>
-                <motion.div
-                  className="group relative flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-6 overflow-hidden"
-                  whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                >
-                  {/* Hover glow background */}
-                  <div
-                    className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 rounded-2xl"
-                    style={{
-                      background: `radial-gradient(ellipse at 50% 0%, ${accent.glow} 0%, transparent 70%)`,
-                    }}
-                  />
-
-                  {/* Top: icon + category */}
-                  <div className="mb-5 flex items-center gap-3">
-                    <div className={`rounded-xl p-2.5 ${accent.iconBg}`}>
-                      <Icon size={18} className={accent.iconColor} />
-                    </div>
-                    <span className="text-xs font-medium text-white/40 uppercase tracking-widest">
-                      {c.category}
-                    </span>
-                  </div>
-
-                  {/* Headline */}
-                  <h3 className={`mb-3 text-xl font-bold leading-tight ${accent.headlineColor}`}>
-                    {c.headline}
-                  </h3>
-
-                  {/* Problem description */}
-                  <p className="flex-1 text-sm text-white/55 leading-relaxed">
-                    {c.problem}
-                  </p>
-
-                  {/* Metric Badge */}
-                  <div className="mt-6">
+                <Link href="/casos" className="block h-full">
+                  <motion.div
+                    className="group relative flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-6 overflow-hidden cursor-pointer"
+                    whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                  >
+                    {/* Hover glow background */}
                     <div
-                      className={`inline-flex w-full flex-col items-center rounded-xl border px-4 py-3 ${accent.badge}`}
-                      style={{ boxShadow: `0 0 20px ${accent.glowStrong}` }}
-                    >
-                      <span className="font-mono text-lg font-bold tracking-tight">
-                        {c.metric}
+                      className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 rounded-2xl"
+                      style={{
+                        background: `radial-gradient(ellipse at 50% 0%, ${accent.glow} 0%, transparent 70%)`,
+                      }}
+                    />
+
+                    {/* Top: icon + category */}
+                    <div className="mb-5 flex items-center gap-3">
+                      <div className={`rounded-xl p-2.5 ${accent.iconBg}`}>
+                        <Icon size={18} className={accent.iconColor} />
+                      </div>
+                      <span className="text-xs font-medium text-white/40 uppercase tracking-widest">
+                        {c.category}
                       </span>
-                      <span className="mt-0.5 text-xs opacity-70">{c.metricSub}</span>
                     </div>
-                  </div>
-                </motion.div>
+
+                    {/* Headline */}
+                    <h3 className={`mb-3 text-xl font-bold leading-tight ${accent.headlineColor}`}>
+                      {c.headline}
+                    </h3>
+
+                    {/* Problem description */}
+                    <p className="flex-1 text-sm text-white/55 leading-relaxed">
+                      {c.problem}
+                    </p>
+
+                    {/* Metric Badge */}
+                    <div className="mt-6">
+                      <div
+                        className={`inline-flex w-full flex-col items-center rounded-xl border px-4 py-3 ${accent.badge}`}
+                        style={{ boxShadow: `0 0 20px ${accent.glowStrong}` }}
+                      >
+                        <span className="font-mono text-lg font-bold tracking-tight">
+                          {c.metric}
+                        </span>
+                        <span className="mt-0.5 text-xs opacity-70">{c.metricSub}</span>
+                      </div>
+                    </div>
+
+                    {/* CTA link */}
+                    <div className="mt-4 flex items-center gap-1.5 text-xs text-white/30 transition-colors group-hover:text-white/60">
+                      Ver caso completo
+                      <ArrowRight size={12} className="transition-transform group-hover:translate-x-1" />
+                    </div>
+                  </motion.div>
+                </Link>
               </FadeUp>
             );
           })}
