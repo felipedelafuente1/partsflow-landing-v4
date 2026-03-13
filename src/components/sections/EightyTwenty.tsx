@@ -38,12 +38,12 @@ const deals = [
 
 export function EightyTwenty() {
   return (
-    <section id="producto" className="relative bg-background py-24 sm:py-32">
+    <section id="producto" className="relative bg-background py-12 sm:py-32">
       <div className="mx-auto max-w-7xl px-6">
         {/* Section Header */}
         <FadeUp>
           <div className="mx-auto max-w-3xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+            <h2 className="text-2xl font-bold tracking-tight sm:text-4xl md:text-5xl">
               Partsflow{" "}
               <span className="text-mint-400">NO</span>{" "}
               automatiza el 100%
@@ -56,7 +56,7 @@ export function EightyTwenty() {
         </FadeUp>
 
         {/* Bento Grid */}
-        <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-5">
+        <div className="mt-8 sm:mt-16 grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-5">
           {/* 80% AI Card */}
           <FadeUp delay={0.1} className="md:col-span-3">
             <motion.div

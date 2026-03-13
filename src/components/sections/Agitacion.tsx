@@ -34,7 +34,7 @@ const falseSolutions = [
 
 export function Agitacion() {
   return (
-    <section className="relative bg-black py-24 sm:py-32">
+    <section className="relative bg-black py-12 sm:py-32">
       {/* Top separator */}
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
@@ -49,11 +49,11 @@ export function Agitacion() {
 
       <div className="relative mx-auto max-w-7xl px-6">
         {/* Header */}
-        <FadeUp className="mb-14 text-center">
+        <FadeUp className="mb-8 sm:mb-14 text-center">
           <p className="mb-3 font-mono text-xs font-medium uppercase tracking-widest text-red-400/70">
             El problema
           </p>
-          <h2 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
             ¿Por qué estás perdiendo{" "}
             <span className="text-red-400">ventas todos los días</span>?
           </h2>

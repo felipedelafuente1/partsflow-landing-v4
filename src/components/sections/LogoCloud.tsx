@@ -91,7 +91,7 @@ function LogoItem({ name, img }: { name: string; img: string }) {
 
 export function LogoCloud() {
   return (
-    <section className="relative bg-background py-16 sm:py-20">
+    <section className="relative bg-background py-10 sm:py-20">
       <div className="mx-auto max-w-7xl px-6">
         <FadeUp>
           <p className="text-center text-sm font-medium uppercase tracking-widest text-muted/60">
@@ -101,7 +101,7 @@ export function LogoCloud() {
 
         {/* Marquee Container */}
         <FadeUp delay={0.1}>
-          <div className="relative mt-10 overflow-hidden">
+          <div className="relative mt-6 sm:mt-10 overflow-hidden">
             {/* Fade edges */}
             <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-24 bg-gradient-to-r from-black to-transparent" />
             <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-24 bg-gradient-to-l from-black to-transparent" />
