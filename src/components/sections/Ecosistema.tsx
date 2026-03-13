@@ -11,10 +11,12 @@ const integrations = [
     id: "whatsapp",
     label: "WhatsApp",
     sublabel: "Canal",
+    mobileLabel: "API Oficial · 24/7",
     icon: MessageSquare,
     iconClass: "text-[#25D366]",
     iconBg: "bg-[#25D366]/10 border-[#25D366]/20",
     hoverBorder: "hover:border-[#25D366]/30",
+    glowColor: "rgba(37,211,102,0.35)",
     body: "Canal principal de comunicación. Respuestas instantáneas 24/7 vía API Oficial.",
     tags: ["API Oficial", "Cloud API", "Business"],
     side: "left" as const,
@@ -24,10 +26,12 @@ const integrations = [
     id: "erp",
     label: "ERP",
     sublabel: "El Cerebro",
+    mobileLabel: "Sincronización de Stock y Precios",
     icon: Database,
     iconClass: "text-mint-400",
     iconBg: "bg-mint-400/10 border-mint-400/20",
     hoverBorder: "hover:border-mint-400/30",
+    glowColor: "rgba(74,222,128,0.35)",
     body: "Conexión bidireccional con Bsale, Softland y Defontana. Sincronizamos stock, precios y catálogos en tiempo real.",
     tags: ["Bsale", "Softland", "Defontana"],
     side: "right" as const,
@@ -37,10 +41,12 @@ const integrations = [
     id: "ecommerce",
     label: "Ecommerce",
     sublabel: "Venta Online",
+    mobileLabel: "Pedidos Sincronizados",
     icon: ShoppingCart,
     iconClass: "text-blue-400",
     iconBg: "bg-blue-400/10 border-blue-400/20",
     hoverBorder: "hover:border-blue-400/30",
+    glowColor: "rgba(96,165,250,0.35)",
     body: "Integración con Shopify, Jumpseller y WooCommerce para sincronizar pedidos automáticamente.",
     tags: ["Shopify", "Jumpseller", "WooCommerce"],
     side: "left" as const,
@@ -50,10 +56,12 @@ const integrations = [
     id: "couriers",
     label: "Couriers",
     sublabel: "Logística",
+    mobileLabel: "Cotización y Tracking",
     icon: Truck,
     iconClass: "text-purple-400",
     iconBg: "bg-purple-400/10 border-purple-400/20",
     hoverBorder: "hover:border-purple-400/30",
+    glowColor: "rgba(167,139,250,0.35)",
     body: "Cotización de envíos y tracking automático con Starken, ChileExpress y BlueExpress.",
     tags: ["Starken", "ChileExpress", "BlueExpress"],
     side: "right" as const,
@@ -195,6 +203,178 @@ function ConnectorH({
   );
 }
 
+/* ── Mobile Integration Card (Compact + Glassmorphism) ── */
+
+function MobileIntCard({ data }: { data: (typeof integrations)[0] }) {
+  const Icon = data.icon;
+  return (
+    <motion.div
+      whileTap={{
+        boxShadow: `0 0 24px ${data.glowColor}, 0 0 48px rgba(74,222,128,0.12)`,
+        borderColor: "rgba(74,222,128,0.3)",
+      }}
+      transition={{ duration: 0.15 }}
+      className="relative rounded-2xl border border-white/[0.08] bg-white/[0.03] backdrop-blur-md p-4 cursor-pointer select-none"
+    >
+      {/* Icon + label row */}
+      <div className="mb-2.5 flex items-center gap-2.5">
+        <div
+          className={cn(
+            "flex h-9 w-9 shrink-0 items-center justify-center rounded-full border",
+            data.iconBg
+          )}
+        >
+          <Icon size={16} className={data.iconClass} />
+        </div>
+        <div className="min-w-0">
+          <p className="text-sm font-semibold text-white">{data.label}</p>
+          <p className="truncate font-mono text-[10px] text-white/40">
+            {data.mobileLabel}
+          </p>
+        </div>
+      </div>
+
+      {/* Tags as pills */}
+      <div className="flex flex-wrap gap-1.5">
+        {data.tags.map((tag) => (
+          <span
+            key={tag}
+            className="rounded-full border border-white/[0.08] bg-white/[0.05] px-2.5 py-0.5 font-mono text-[10px] text-white/45"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+    </motion.div>
+  );
+}
+
+/* ── Mobile Hub (smaller) ── */
+
+function MobileHub() {
+  return (
+    <div className="relative flex h-20 w-20 items-center justify-center rounded-2xl border border-mint-400/20 bg-zinc-900">
+      <motion.div
+        className="absolute inset-0 rounded-2xl border border-mint-400/25"
+        animate={{ scale: [1, 1.2], opacity: [0.35, 0] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
+      />
+      <motion.div
+        className="absolute inset-0 rounded-2xl border border-mint-400/15"
+        animate={{ scale: [1, 1.4], opacity: [0.2, 0] }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          ease: "easeOut",
+          delay: 0.6,
+        }}
+      />
+      <Image
+        src="/logo.png"
+        alt="Partsflow"
+        width={36}
+        height={36}
+        className="h-9 w-9"
+      />
+    </div>
+  );
+}
+
+/* ── Mobile Connector Lines (SVG) ── */
+
+function MobileConnectors() {
+  return (
+    <svg
+      className="mx-auto block"
+      width="240"
+      height="36"
+      viewBox="0 0 240 36"
+      fill="none"
+    >
+      <defs>
+        <linearGradient
+          id="connDown"
+          x1="120"
+          y1="0"
+          x2="120"
+          y2="36"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#4ade80" stopOpacity="0.5" />
+          <stop offset="1" stopColor="#4ade80" stopOpacity="0.06" />
+        </linearGradient>
+      </defs>
+      {/* Center trunk */}
+      <line
+        x1="120"
+        y1="0"
+        x2="120"
+        y2="14"
+        stroke="url(#connDown)"
+        strokeWidth="1"
+        strokeDasharray="3 3"
+      />
+      {/* Branch left */}
+      <line
+        x1="120"
+        y1="14"
+        x2="60"
+        y2="36"
+        stroke="url(#connDown)"
+        strokeWidth="1"
+        strokeDasharray="3 3"
+      />
+      {/* Branch right */}
+      <line
+        x1="120"
+        y1="14"
+        x2="180"
+        y2="36"
+        stroke="url(#connDown)"
+        strokeWidth="1"
+        strokeDasharray="3 3"
+      />
+    </svg>
+  );
+}
+
+/* ── Vertical connector between card rows ── */
+
+function MobileRowConnector() {
+  return (
+    <svg
+      className="mx-auto block"
+      width="240"
+      height="12"
+      viewBox="0 0 240 12"
+      fill="none"
+    >
+      {/* Left column */}
+      <line
+        x1="60"
+        y1="0"
+        x2="60"
+        y2="12"
+        stroke="#4ade80"
+        strokeOpacity="0.12"
+        strokeWidth="1"
+        strokeDasharray="2 3"
+      />
+      {/* Right column */}
+      <line
+        x1="180"
+        y1="0"
+        x2="180"
+        y2="12"
+        stroke="#4ade80"
+        strokeOpacity="0.12"
+        strokeWidth="1"
+        strokeDasharray="2 3"
+      />
+    </svg>
+  );
+}
+
 /* ── Main Section ── */
 
 export function Ecosistema() {
@@ -272,18 +452,32 @@ export function Ecosistema() {
           </div>
         </FadeUp>
 
-        {/* ── Mobile / Tablet ── */}
+        {/* ── Mobile / Tablet — Compact Hub-Centered Layout ── */}
         <div className="lg:hidden">
-          <div className="mb-10 flex justify-center">
-            <HubNode />
-          </div>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {integrations.map((item, i) => (
-              <FadeUp key={item.id} delay={i * 0.1}>
-                <IntCard data={item} />
-              </FadeUp>
-            ))}
-          </div>
+          <FadeUp delay={0.1}>
+            <div className="flex flex-col items-center">
+              {/* Central Hub */}
+              <MobileHub />
+
+              {/* Connector lines branching to grid */}
+              <MobileConnectors />
+
+              {/* Row 1 — WhatsApp & ERP */}
+              <div className="grid w-full grid-cols-2 gap-3">
+                <MobileIntCard data={integrations[0]} />
+                <MobileIntCard data={integrations[1]} />
+              </div>
+
+              {/* Vertical connectors between rows */}
+              <MobileRowConnector />
+
+              {/* Row 2 — Ecommerce & Couriers */}
+              <div className="grid w-full grid-cols-2 gap-3">
+                <MobileIntCard data={integrations[2]} />
+                <MobileIntCard data={integrations[3]} />
+              </div>
+            </div>
+          </FadeUp>
         </div>
       </div>
     </section>
