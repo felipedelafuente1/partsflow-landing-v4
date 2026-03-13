@@ -104,15 +104,15 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="relative bg-background py-24 sm:py-32">
+    <section id="faq" className="relative bg-background py-12 sm:py-32">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
       <div className="mx-auto max-w-3xl px-6">
-        <FadeUp className="mb-14 text-center">
+        <FadeUp className="mb-8 sm:mb-14 text-center">
           <p className="mb-3 text-xs font-medium uppercase tracking-widest text-mint-400/70">
             FAQ
           </p>
-          <h2 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
             Preguntas frecuentes{" "}
             <span className="text-gradient-mint">antes de agendar</span>
           </h2>

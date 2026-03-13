@@ -54,7 +54,7 @@ export function Precios() {
   const { openModal } = useBookingModal();
 
   return (
-    <section id="precios" className="relative bg-black py-24 sm:py-32">
+    <section id="precios" className="relative bg-black py-12 sm:py-32">
       {/* Top separator */}
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       {/* Ambient glow behind Silver */}
@@ -68,11 +68,11 @@ export function Precios() {
 
       <div className="relative mx-auto max-w-7xl px-6">
         {/* Header */}
-        <FadeUp className="mb-14 text-center">
+        <FadeUp className="mb-8 sm:mb-14 text-center">
           <p className="mb-3 text-xs font-medium uppercase tracking-widest text-mint-400/70">
             Precios
           </p>
-          <h2 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
             Planes que crecen{" "}
             <span className="text-gradient-mint">con tu volumen</span>
           </h2>

@@ -38,17 +38,17 @@ const accentMap = {
 
 export function CasosDeExito() {
   return (
-    <section id="beneficios" className="relative bg-background py-24 sm:py-32">
+    <section id="beneficios" className="relative bg-background py-12 sm:py-32">
       {/* Subtle top separator */}
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
       <div className="mx-auto max-w-7xl px-6">
         {/* Header */}
-        <FadeUp className="mb-16 text-center">
+        <FadeUp className="mb-8 sm:mb-16 text-center">
           <p className="mb-3 text-xs font-medium uppercase tracking-widest text-mint-400/70">
             Casos de Éxito
           </p>
-          <h2 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
             Resultados que{" "}
             <span className="text-gradient-mint">hablan solos</span>
           </h2>
@@ -126,7 +126,7 @@ export function CasosDeExito() {
         </div>
 
         {/* Bottom social proof strip */}
-        <FadeUp delay={0.4} className="mt-14 text-center">
+        <FadeUp delay={0.4} className="mt-8 sm:mt-14 text-center">
           <p className="text-sm text-white/30">
             Más de{" "}
             <span className="font-mono font-semibold text-white/60">50 negocios</span>{" "}

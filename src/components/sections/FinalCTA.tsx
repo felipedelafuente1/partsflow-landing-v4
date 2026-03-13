@@ -9,7 +9,7 @@ export function FinalCTA() {
   const { openModal } = useBookingModal();
 
   return (
-    <section id="contacto" className="relative bg-black py-24 sm:py-32 overflow-hidden">
+    <section id="contacto" className="relative bg-black py-12 sm:py-32 overflow-hidden">
       {/* Ambient glow */}
       <div
         className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 h-[600px]"
@@ -26,7 +26,7 @@ export function FinalCTA() {
           <p className="mb-4 text-xs font-medium uppercase tracking-widest text-mint-400/70">
             El siguiente paso
           </p>
-          <h2 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
             ¿Listo para atender{" "}
             <span className="text-gradient-mint">10 veces más clientes?</span>
           </h2>

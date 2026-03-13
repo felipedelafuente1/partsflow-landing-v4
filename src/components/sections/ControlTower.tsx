@@ -419,14 +419,14 @@ function ROICalculatorCard() {
 
 export function ControlTower() {
   return (
-    <section id="control-tower" className="bg-black pt-24 pb-32">
+    <section id="control-tower" className="bg-black pt-12 pb-16 sm:pt-24 sm:pb-32">
       <div className="mx-auto max-w-7xl px-6">
         {/* Header */}
-        <FadeUp className="mb-14 text-center">
+        <FadeUp className="mb-8 sm:mb-14 text-center">
           <p className="mb-3 text-xs font-medium uppercase tracking-widest text-mint-400/70">
             Control Tower
           </p>
-          <h2 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
             Lo que no se mide,{" "}
             <span className="text-gradient-mint">se pierde</span>
           </h2>

@@ -379,7 +379,7 @@ function MobileRowConnector() {
 
 export function Ecosistema() {
   return (
-    <section className="relative bg-black py-24 sm:py-32">
+    <section className="relative bg-black py-12 sm:py-32">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
       {/* Ambient hub glow */}
@@ -393,11 +393,11 @@ export function Ecosistema() {
 
       <div className="relative mx-auto max-w-7xl px-6">
         {/* Header */}
-        <FadeUp className="mb-16 text-center">
+        <FadeUp className="mb-8 sm:mb-16 text-center">
           <p className="mb-3 font-mono text-xs font-medium uppercase tracking-widest text-mint-400/70">
             Integraciones
           </p>
-          <h2 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
             Se conecta con todo{" "}
             <span className="text-gradient-mint">tu ecosistema</span>
           </h2>
