@@ -162,7 +162,7 @@ export function Footer() {
                 </span>
               </div>
               <p className="text-[11px] text-zinc-400 leading-snug">
-                Vende repuestos mientras duermes.
+                Tu local nunca cierra.
               </p>
             </div>
           </div>

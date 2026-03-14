@@ -30,7 +30,7 @@ export function Hero() {
             <div className="inline-flex items-center gap-2 rounded-full border border-mint-400/20 bg-mint-400/5 px-4 py-1.5 mb-8">
               <div className="h-1.5 w-1.5 rounded-full bg-mint-400 animate-pulse" />
               <span className="text-xs font-medium text-mint-400 tracking-wide">
-                Nuevo: IA para autopartes
+                Conoce a Julia: IA para autopartes
               </span>
             </div>
           </FadeUp>
@@ -38,12 +38,12 @@ export function Hero() {
           {/* Headline */}
           <FadeUp delay={0.1}>
             <h1 className="max-w-4xl text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-              Vende repuestos
-              <br />
-              mientras duermes.
+              Tu local nunca cierra.
               <br />
               <span className="text-gradient-mint">
-                Tu WhatsApp en piloto automático.
+                Julia califica y prepara
+                <br />
+                tus ventas 24/7.
               </span>
             </h1>
           </FadeUp>
@@ -51,8 +51,12 @@ export function Hero() {
           {/* Subtitle */}
           <FadeUp delay={0.2}>
             <p className="mt-6 max-w-2xl text-lg text-muted sm:text-xl">
-              Atiende, cotiza y recupera ventas 24/7 con la IA experta en
-              autopartes.
+              Conoce a Julia: la IA experta en autopartes que califica,
+              identifica y prepara tus ventas 24/7.
+            </p>
+            <p className="mt-3 max-w-2xl text-base text-muted/80">
+              Julia atiende al instante, extrae los datos del vehículo y te
+              deja la cotización sugerida lista para cerrar.
             </p>
           </FadeUp>
 
