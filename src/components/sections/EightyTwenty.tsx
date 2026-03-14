@@ -18,15 +18,15 @@ import {
 } from "lucide-react";
 
 const aiFeatures = [
-  { icon: MessageSquare, text: "Cotizaciones automáticas 24/7" },
-  { icon: Zap, text: "Búsqueda inteligente de autopartes" },
+  { icon: MessageSquare, text: "Calificación y preparación de datos 24/7" },
+  { icon: Zap, text: "Identificación de VIN, Patente y Códigos OEM" },
   { icon: Clock, text: "Respuestas instantáneas a clientes" },
   { icon: Package, text: "Gestión de inventario en tiempo real" },
 ];
 
 const humanFeatures = [
-  { icon: Handshake, text: "Negociaciones de alto valor" },
-  { icon: Users, text: "Relaciones con clientes clave" },
+  { icon: Handshake, text: "Valida la sugerencia de Julia y cierra" },
+  { icon: Users, text: "Negociaciones de alto valor" },
   { icon: Target, text: "Decisiones estratégicas de pricing" },
 ];
 
@@ -103,7 +103,7 @@ export function EightyTwenty() {
 
                 {/* Title */}
                 <h3 className="mt-4 text-2xl font-semibold text-foreground">
-                  Lo que la IA resuelve por ti
+                  Julia te sirve la mesa
                 </h3>
 
                 {/* Features */}
@@ -174,7 +174,7 @@ export function EightyTwenty() {
 
                 {/* Title */}
                 <h3 className="mt-4 text-2xl font-semibold text-foreground">
-                  Tu equipo cierra lo importante
+                  Tu equipo valida y cierra
                 </h3>
 
                 {/* Features */}

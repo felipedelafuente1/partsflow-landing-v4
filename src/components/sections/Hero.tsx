@@ -38,12 +38,12 @@ export function Hero() {
           {/* Headline */}
           <FadeUp delay={0.1}>
             <h1 className="max-w-4xl text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-              Vende repuestos
-              <br />
-              mientras duermes.
+              Tu local nunca cierra.
               <br />
               <span className="text-gradient-mint">
-                Tu WhatsApp en piloto automático.
+                Julia califica y prepara
+                <br />
+                tus ventas 24/7.
               </span>
             </h1>
           </FadeUp>
@@ -51,8 +51,8 @@ export function Hero() {
           {/* Subtitle */}
           <FadeUp delay={0.2}>
             <p className="mt-6 max-w-2xl text-lg text-muted sm:text-xl">
-              Atiende, cotiza y recupera ventas 24/7 con la IA experta en
-              autopartes.
+              Julia atiende, califica y deja la mesa servida para que tu
+              equipo solo cierre.
             </p>
           </FadeUp>
 
