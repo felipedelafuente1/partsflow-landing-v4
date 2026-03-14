@@ -18,15 +18,15 @@ import {
 } from "lucide-react";
 
 const aiFeatures = [
-  { icon: MessageSquare, text: "Calificación y preparación de datos 24/7" },
-  { icon: Zap, text: "Identificación de VIN, Patente y Códigos OEM" },
-  { icon: Clock, text: "Respuestas instantáneas a clientes" },
-  { icon: Package, text: "Gestión de inventario en tiempo real" },
+  { icon: Zap, text: "Identificación técnica (VIN, Patente y OEM)" },
+  { icon: MessageSquare, text: "Calificación de leads y captura de datos" },
+  { icon: Package, text: "Sugerencia de cotización basada en tu stock" },
+  { icon: Clock, text: "Atención instantánea 24/7 sin errores" },
 ];
 
 const humanFeatures = [
-  { icon: Handshake, text: "Valida la sugerencia de Julia y cierra" },
-  { icon: Users, text: "Negociaciones de alto valor" },
+  { icon: CheckCircle2, text: "Valida la sugerencia de Julia y cierra" },
+  { icon: Handshake, text: "Negociaciones de alto valor" },
   { icon: Target, text: "Decisiones estratégicas de pricing" },
 ];
 
@@ -50,7 +50,7 @@ export function EightyTwenty() {
               <br className="hidden sm:block" /> de la venta
             </h2>
             <p className="mt-4 text-lg text-muted">
-              Automatizamos lo repetitivo. Tu equipo cierra lo importante.
+              Julia automatiza lo repetitivo. Tu equipo cierra lo importante.
             </p>
           </div>
         </FadeUp>
@@ -103,7 +103,7 @@ export function EightyTwenty() {
 
                 {/* Title */}
                 <h3 className="mt-4 text-2xl font-semibold text-foreground">
-                  Julia te sirve la mesa
+                  Lo que Julia resuelve por ti
                 </h3>
 
                 {/* Features */}
@@ -176,6 +176,12 @@ export function EightyTwenty() {
                 <h3 className="mt-4 text-2xl font-semibold text-foreground">
                   Tu equipo valida y cierra
                 </h3>
+
+                <p className="mt-3 text-sm text-muted leading-relaxed">
+                  Julia te entrega la mesa servida. Tus vendedores reciben la
+                  información técnica y el precio sugerido; ellos solo validan y
+                  envían el mensaje final. El control siempre es tuyo.
+                </p>
 
                 {/* Features */}
                 <ul className="mt-6 space-y-3">

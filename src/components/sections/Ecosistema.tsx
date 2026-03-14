@@ -19,6 +19,7 @@ const integrations = [
     glowColor: "rgba(37,211,102,0.35)",
     body: "Canal principal de comunicación. Respuestas instantáneas 24/7 vía API Oficial.",
     tags: ["API Oficial", "Cloud API", "Business"],
+    comingSoon: false,
     side: "left" as const,
     row: 1,
   },
@@ -32,8 +33,9 @@ const integrations = [
     iconBg: "bg-mint-400/10 border-mint-400/20",
     hoverBorder: "hover:border-mint-400/30",
     glowColor: "rgba(74,222,128,0.35)",
-    body: "Conexión bidireccional con Bsale, Softland y Defontana. Generamos sugerencias de cotización basadas en stock real.",
+    body: "Julia lee tu inventario en Bsale o Softland para sugerir precios actualizados. Conexión bidireccional en tiempo real.",
     tags: ["Bsale", "Softland", "Defontana"],
+    comingSoon: false,
     side: "right" as const,
     row: 1,
   },
@@ -49,6 +51,7 @@ const integrations = [
     glowColor: "rgba(96,165,250,0.35)",
     body: "Integración con Shopify, Jumpseller y WooCommerce para sincronizar pedidos automáticamente.",
     tags: ["Shopify", "Jumpseller", "WooCommerce"],
+    comingSoon: false,
     side: "left" as const,
     row: 2,
   },
@@ -62,8 +65,9 @@ const integrations = [
     iconBg: "bg-purple-400/10 border-purple-400/20",
     hoverBorder: "hover:border-purple-400/30",
     glowColor: "rgba(167,139,250,0.35)",
-    body: "Cotización de envíos y tracking automático con Starken, ChileExpress y BlueExpress.",
+    body: "Próximamente Julia automatizará el cálculo de envíos y tracking con Starken y ChileExpress.",
     tags: ["Starken", "ChileExpress", "BlueExpress"],
+    comingSoon: true,
     side: "right" as const,
     row: 2,
   },
@@ -105,6 +109,11 @@ function IntCard({
       </div>
       <p className="mb-3 text-xs leading-relaxed text-white/50">{data.body}</p>
       <div className="flex flex-wrap gap-1.5">
+        {data.comingSoon && (
+          <span className="rounded-md border border-amber-400/20 bg-amber-400/10 px-2 py-0.5 font-mono text-[10px] font-semibold text-amber-400/80 uppercase tracking-wider">
+            Próximamente
+          </span>
+        )}
         {data.tags.map((tag) => (
           <span
             key={tag}
@@ -236,6 +245,11 @@ function MobileIntCard({ data }: { data: (typeof integrations)[0] }) {
 
       {/* Tags as pills */}
       <div className="flex flex-wrap gap-1.5">
+        {data.comingSoon && (
+          <span className="rounded-full border border-amber-400/20 bg-amber-400/10 px-2.5 py-0.5 font-mono text-[10px] font-semibold text-amber-400/80 uppercase tracking-wider">
+            Próximamente
+          </span>
+        )}
         {data.tags.map((tag) => (
           <span
             key={tag}
@@ -402,7 +416,7 @@ export function Ecosistema() {
             <span className="text-gradient-mint">tu ecosistema</span>
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-base text-white/50 leading-relaxed">
-            Partsflow se integra con las herramientas que ya usas, sin cambiar
+            Julia se integra con las herramientas que ya usas, sin cambiar
             tu forma de trabajar.
           </p>
         </FadeUp>
