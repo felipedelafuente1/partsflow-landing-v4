@@ -30,7 +30,7 @@ export function Hero() {
             <div className="inline-flex items-center gap-2 rounded-full border border-mint-400/20 bg-mint-400/5 px-4 py-1.5 mb-8">
               <div className="h-1.5 w-1.5 rounded-full bg-mint-400 animate-pulse" />
               <span className="text-xs font-medium text-mint-400 tracking-wide">
-                Conoce a Julia: IA para autopartes
+                IA experta en autopartes
               </span>
             </div>
           </FadeUp>
@@ -41,28 +41,22 @@ export function Hero() {
               Tu local nunca cierra.
               <br />
               <span className="text-gradient-mint">
-                Julia califica y prepara
-                <br />
-                tus ventas 24/7.
+                Partsflow prepara tus ventas 24/7.
               </span>
             </h1>
           </FadeUp>
 
           {/* Subtitle */}
           <FadeUp delay={0.2}>
-            <p className="mt-6 max-w-2xl text-lg text-muted sm:text-xl">
-              Conoce a Julia: la IA experta en autopartes que califica,
-              identifica y prepara tus ventas 24/7.
-            </p>
-            <p className="mt-3 max-w-2xl text-base text-muted/80">
-              Julia atiende al instante, extrae los datos del vehículo y te
-              deja la cotización sugerida lista para cerrar.
+            <p className="mt-4 max-w-2xl text-base text-muted sm:mt-6 sm:text-lg">
+              La IA experta en autopartes que identifica vehículos, extrae datos
+              técnicos y te entrega la cotización sugerida lista para cerrar.
             </p>
           </FadeUp>
 
           {/* CTAs */}
           <FadeUp delay={0.3}>
-            <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
+            <div className="mt-6 flex flex-col items-center gap-4 sm:mt-10 sm:flex-row">
               <button
                 onClick={openModal}
                 className="group inline-flex items-center gap-2 rounded-full bg-mint-400 px-8 py-3.5 text-sm font-semibold text-black transition-all hover:bg-mint-300 hover:shadow-[0_0_30px_rgba(74,222,128,0.3)]"

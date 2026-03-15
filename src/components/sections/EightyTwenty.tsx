@@ -25,7 +25,7 @@ const aiFeatures = [
 ];
 
 const humanFeatures = [
-  { icon: CheckCircle2, text: "Valida la sugerencia de Julia y cierra" },
+  { icon: CheckCircle2, text: "Valida la sugerencia de Partsflow y cierra" },
   { icon: Handshake, text: "Negociaciones de alto valor" },
   { icon: Target, text: "Decisiones estratégicas de pricing" },
 ];
@@ -50,7 +50,7 @@ export function EightyTwenty() {
               <br className="hidden sm:block" /> de la venta
             </h2>
             <p className="mt-4 text-lg text-muted">
-              Julia automatiza lo repetitivo. Tu equipo cierra lo importante.
+              Partsflow automatiza lo repetitivo. Tu equipo cierra lo importante.
             </p>
           </div>
         </FadeUp>
@@ -103,7 +103,7 @@ export function EightyTwenty() {
 
                 {/* Title */}
                 <h3 className="mt-4 text-2xl font-semibold text-foreground">
-                  Lo que Julia resuelve por ti
+                  Lo que Partsflow resuelve por ti
                 </h3>
 
                 {/* Features */}
@@ -178,9 +178,9 @@ export function EightyTwenty() {
                 </h3>
 
                 <p className="mt-3 text-sm text-muted leading-relaxed">
-                  Julia te entrega la mesa servida. Tus vendedores reciben la
-                  información técnica y el precio sugerido; ellos solo validan y
-                  envían el mensaje final. El control siempre es tuyo.
+                  Partsflow te entrega la mesa servida. Tus vendedores reciben
+                  la información técnica y el precio sugerido; ellos solo
+                  validan y envían el mensaje final. El control siempre es tuyo.
                 </p>
 
                 {/* Features */}
