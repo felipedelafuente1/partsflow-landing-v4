@@ -33,7 +33,7 @@ const integrations = [
     iconBg: "bg-mint-400/10 border-mint-400/20",
     hoverBorder: "hover:border-mint-400/30",
     glowColor: "rgba(74,222,128,0.35)",
-    body: "Julia lee tu inventario en Bsale o Softland para sugerir precios actualizados. Conexión bidireccional en tiempo real.",
+    body: "Partsflow lee tu inventario en Bsale o Softland para sugerir precios actualizados. Conexión bidireccional en tiempo real.",
     tags: ["Bsale", "Softland", "Defontana"],
     comingSoon: false,
     side: "right" as const,
@@ -65,7 +65,7 @@ const integrations = [
     iconBg: "bg-purple-400/10 border-purple-400/20",
     hoverBorder: "hover:border-purple-400/30",
     glowColor: "rgba(167,139,250,0.35)",
-    body: "Próximamente Julia automatizará el cálculo de envíos y tracking con Starken y ChileExpress.",
+    body: "Próximamente Partsflow automatizará el cálculo de envíos y tracking con Starken y ChileExpress.",
     tags: ["Starken", "ChileExpress", "BlueExpress"],
     comingSoon: true,
     side: "right" as const,
@@ -416,7 +416,7 @@ export function Ecosistema() {
             <span className="text-gradient-mint">tu ecosistema</span>
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-base text-white/50 leading-relaxed">
-            Julia se integra con las herramientas que ya usas, sin cambiar
+            Partsflow se integra con las herramientas que ya usas, sin cambiar
             tu forma de trabajar.
           </p>
         </FadeUp>

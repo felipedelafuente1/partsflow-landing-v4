@@ -2,6 +2,7 @@
 
 import { Navbar } from "@/components/layout/Navbar";
 import { Hero } from "@/components/sections/Hero";
+import { MesaServida } from "@/components/sections/MesaServida";
 import { Agitacion } from "@/components/sections/Agitacion";
 import { LogoCloud } from "@/components/sections/LogoCloud";
 import { EightyTwenty } from "@/components/sections/EightyTwenty";
@@ -20,6 +21,7 @@ export default function Home() {
       <main className="min-h-screen bg-background">
         <Navbar />
         <Hero />
+        <MesaServida />
         <LogoCloud />
         <Agitacion />
         <EightyTwenty />
