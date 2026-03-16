@@ -11,38 +11,51 @@ import {
   FileText,
   ChevronRight,
   Car,
+  Zap,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-/* ─── Data ─── */
+/* ─── Data — Toyota Hilux 2.4D 2019 (consistent across all steps) ─── */
 
 const STEP1_MESSAGES = [
   {
     id: 1,
     sender: "client" as const,
-    text: "Necesito cotizar foco frontal y disco de embrague para Chevrolet Apache S10 2011",
-    time: "19:46",
+    text: "Hola, necesito pastillas de freno para mi Hilux.",
+    time: "10:23",
   },
-  { id: 2, sender: "client" as const, isDocument: true, time: "19:46" },
+  {
+    id: 2,
+    sender: "bot" as const,
+    text: "¡Hola! Con gusto. Para asegurarnos de que sea el repuesto exacto, ¿me podrías enviar la patente o el número de chasis (VIN)?",
+    time: "10:23",
+  },
   {
     id: 3,
+    sender: "client" as const,
+    text: "VJ1982",
+    time: "10:24",
+  },
+  {
+    id: 4,
     sender: "bot" as const,
-    text: "Lo tomaré con los siguientes datos:\nVIN: 9BG138AX0BC423418\nMarca: Chevrolet\nModelo: S10 Apache\nAño: 2011\nVersión: III 2.4\nProducto(s): Foco frontal lado conductor, Disco de embrague",
-    time: "19:47",
+    text: "Identificado: Toyota Hilux 2.4 Diesel (2019).\nVIN: JTFSS22P4K0012845\nBuscando pastillas de freno en stock...",
+    time: "10:24",
+    highlight: true,
   },
 ];
 
 const DASHBOARD_PRODUCTS = [
-  { name: "DISCO DE EMBRAGUE", sku: "LKAUTBRKIT009", price: "$120.000" },
-  { name: "FOCO FRONTAL LADO CONDUCTOR", sku: "9956939", price: "$85.000" },
+  { name: "PASTILLAS FRENO DELANTERAS", sku: "04465-0K290", price: "$38.990" },
+  { name: "PASTILLAS FRENO TRASERAS", sku: "04466-0K210", price: "$29.990" },
 ];
 
 const STEP3_MESSAGES = [
   {
     id: 1,
     sender: "bot" as const,
-    text: "DISCO DE EMBRAGUE:\n- $120.000 - MARCA LUK\n\nFOCO FRONTAL:\n- $85.000\n\nPrecios con IVA incluido.",
-    time: "15:32",
+    text: "PASTILLAS DE FRENO - Toyota Hilux 2.4D 2019:\n\nDelanteras: $38.990 - TRW\nTraseras: $29.990 - TRW\n\nPrecios con IVA incluido.",
+    time: "10:31",
   },
   { id: 2, sender: "system" as const, text: "David movió la orden a 'Cotización enviada'" },
 ];
@@ -53,39 +66,29 @@ function ChatBubble({
   sender,
   text,
   time,
-  isDocument,
+  highlight,
 }: {
   sender: "client" | "bot";
   text?: string;
   time: string;
-  isDocument?: boolean;
+  highlight?: boolean;
 }) {
   return (
     <div className={`flex ${sender === "client" ? "justify-end" : "justify-start"}`}>
       <div
-        className={`max-w-[90%] rounded-xl px-2.5 py-1.5 ${
+        className={cn(
+          "max-w-[90%] rounded-xl px-2.5 py-2",
           sender === "client"
-            ? "rounded-br-sm bg-[#005C4B] text-foreground"
-            : "rounded-bl-sm bg-[#1F2C34] text-foreground"
-        }`}
-      >
-        {isDocument && (
-          <div className="rounded-md border border-amber-400/20 bg-amber-900/10 p-2 mb-1">
-            <div className="flex items-center gap-1.5 mb-1">
-              <FileText size={12} className="text-amber-400/70" />
-              <span className="text-[9px] font-semibold uppercase tracking-wider text-amber-400/70">
-                Certificado R.V.M.
-              </span>
-            </div>
-            <div className="space-y-0.5 text-[10px] text-white/50">
-              <p>CHEVROLET · S10 APACHE III 2.4 · 2011</p>
-              <p className="font-mono text-[9px] text-white/30">9BG138AX0BC423418</p>
-            </div>
-          </div>
+            ? "rounded-br-sm bg-[#005C4B]"
+            : "rounded-bl-sm bg-[#1F2C34]",
+          highlight && "border border-mint-400/20 bg-[#1a2e28]"
         )}
-        {text && <p className="whitespace-pre-line text-xs leading-snug">{text}</p>}
+      >
+        {text && (
+          <p className="whitespace-pre-line text-[13px] leading-snug text-white/90">{text}</p>
+        )}
         <div className={`mt-0.5 flex items-center gap-1 ${sender === "client" ? "justify-end" : "justify-start"}`}>
-          <span className="text-[9px] text-muted">{time}</span>
+          <span className="text-[9px] text-white/30">{time}</span>
           {sender === "client" && <CheckCheck size={12} className="text-electric-400" />}
         </div>
       </div>
@@ -93,7 +96,7 @@ function ChatBubble({
   );
 }
 
-/* ─── Step 1: Compact WhatsApp Chat ─── */
+/* ─── Step 1: WhatsApp Chat ─── */
 
 function Step1Chat() {
   return (
@@ -103,20 +106,26 @@ function Step1Chat() {
           <Bot size={14} className="text-black" />
         </div>
         <div>
-          <p className="text-xs font-semibold text-foreground">Partsflow IA</p>
+          <p className="text-xs font-semibold text-white">Partsflow IA</p>
           <p className="text-[9px] text-mint-400">En línea</p>
         </div>
       </div>
       <div className="flex flex-col gap-1.5 p-2.5">
         {STEP1_MESSAGES.map((msg) => (
-          <ChatBubble key={msg.id} sender={msg.sender} text={msg.text} time={msg.time} isDocument={msg.isDocument} />
+          <ChatBubble
+            key={msg.id}
+            sender={msg.sender}
+            text={msg.text}
+            time={msg.time}
+            highlight={msg.highlight}
+          />
         ))}
       </div>
     </div>
   );
 }
 
-/* ─── Step 2: Compact Dashboard ─── */
+/* ─── Step 2: Dashboard ─── */
 
 function Step2Dashboard() {
   return (
@@ -125,8 +134,17 @@ function Step2Dashboard() {
       <div className="flex items-center gap-2 border-b border-white/5 bg-[#0a0a0a] px-3 py-2">
         <Car size={14} className="shrink-0 text-mint-400/60" />
         <p className="truncate font-mono text-[10px] text-white/60">
-          CHEVROLET S10 APACHE III 2.4 2011
+          TOYOTA HILUX 2.4D 2019
         </p>
+      </div>
+
+      {/* VIN extracted badge */}
+      <div className="mx-3 mt-3 flex items-center gap-2 rounded-lg border border-mint-400/20 bg-mint-400/[0.06] px-3 py-2">
+        <Zap size={12} className="shrink-0 text-mint-400" />
+        <div className="flex-1 min-w-0">
+          <p className="text-[9px] font-medium uppercase tracking-wider text-mint-400/60">VIN extraído automáticamente</p>
+          <p className="font-mono text-[11px] font-semibold text-mint-400">JTFSS22P4K0012845</p>
+        </div>
       </div>
 
       <div className="flex flex-col gap-2 p-3">
@@ -136,7 +154,7 @@ function Step2Dashboard() {
             <div className="flex items-center gap-2">
               <CheckCircle2 size={14} className="shrink-0 text-mint-400" />
               <div>
-                <p className="text-xs font-semibold text-foreground">{p.name}</p>
+                <p className="text-xs font-semibold text-white/90">{p.name}</p>
                 <p className="font-mono text-[9px] text-white/30">{p.sku}</p>
               </div>
             </div>
@@ -153,8 +171,8 @@ function Step2Dashboard() {
             </span>
           </div>
           <div className="flex items-center justify-between">
-            <p className="text-[11px] text-purple-300/80 leading-tight">Kit Distribución Hyundai Sonata Yf 2.0</p>
-            <span className="ml-2 shrink-0 font-mono text-xs font-bold text-purple-300">$246.990</span>
+            <p className="text-[11px] text-purple-300/80 leading-tight">Kit Distribución Toyota Hilux 2.4D</p>
+            <span className="ml-2 shrink-0 font-mono text-xs font-bold text-purple-300">$189.990</span>
           </div>
         </div>
 
@@ -168,7 +186,7 @@ function Step2Dashboard() {
   );
 }
 
-/* ─── Step 3: Compact Quotation ─── */
+/* ─── Step 3: Quotation ─── */
 
 function Step3Quotation() {
   return (
@@ -178,7 +196,7 @@ function Step3Quotation() {
           <Bot size={14} className="text-black" />
         </div>
         <div>
-          <p className="text-xs font-semibold text-foreground">Partsflow IA</p>
+          <p className="text-xs font-semibold text-white">Partsflow IA</p>
           <p className="text-[9px] text-mint-400">En línea</p>
         </div>
       </div>
@@ -199,7 +217,7 @@ function Step3Quotation() {
   );
 }
 
-/* ─── Step Content Array (for mobile tabs) ─── */
+/* ─── Steps Config ─── */
 
 const STEPS = [
   { step: 1, label: "El cliente escribe", Component: Step1Chat },
@@ -207,7 +225,38 @@ const STEPS = [
   { step: 3, label: "El vendedor cierra", Component: Step3Quotation },
 ];
 
-/* ─── Mobile Tab Selector ─── */
+/* ─── Step Number (bold, large) ─── */
+
+function StepNumber({ n, label }: { n: number; label: string }) {
+  return (
+    <div className="mb-3 flex items-center gap-2.5">
+      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#00C47C] text-sm font-bold text-black shadow-[0_0_12px_rgba(0,196,124,0.3)]">
+        {n}
+      </span>
+      <span className="text-xs font-semibold uppercase tracking-wider text-white/50">
+        {label}
+      </span>
+    </div>
+  );
+}
+
+/* ─── Desktop Flow Arrow ─── */
+
+function FlowArrow() {
+  return (
+    <div className="hidden items-center justify-center lg:flex">
+      <div className="flex flex-col items-center gap-1">
+        <div className="h-8 w-px bg-gradient-to-b from-transparent via-mint-400/20 to-transparent" />
+        <div className="flex h-9 w-9 items-center justify-center rounded-full border border-mint-400/20 bg-mint-400/[0.08] shadow-[0_0_10px_rgba(0,196,124,0.15)]">
+          <ChevronRight size={18} className="text-mint-400/60" />
+        </div>
+        <div className="h-8 w-px bg-gradient-to-b from-transparent via-mint-400/20 to-transparent" />
+      </div>
+    </div>
+  );
+}
+
+/* ─── Mobile Tabs ─── */
 
 function MobileTabs({ active, onChange }: { active: number; onChange: (i: number) => void }) {
   return (
@@ -225,25 +274,13 @@ function MobileTabs({ active, onChange }: { active: number; onChange: (i: number
         >
           <span className={cn(
             "flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-bold",
-            active === i ? "bg-mint-400 text-black" : "bg-white/10 text-white/40"
+            active === i ? "bg-[#00C47C] text-black" : "bg-white/10 text-white/40"
           )}>
             {s.step}
           </span>
           <span className="hidden sm:inline">{s.label}</span>
         </button>
       ))}
-    </div>
-  );
-}
-
-/* ─── Desktop Arrow ─── */
-
-function FlowArrow() {
-  return (
-    <div className="hidden items-center justify-center lg:flex">
-      <div className="flex h-7 w-7 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.03]">
-        <ChevronRight size={14} className="text-mint-400/40" />
-      </div>
     </div>
   );
 }
@@ -283,42 +320,34 @@ export function MesaServida() {
         <div className="lg:hidden">
           <FadeUp delay={0.15}>
             <div className="mx-auto max-w-sm">
+              <StepNumber n={STEPS[activeTab].step} label={STEPS[activeTab].label} />
               <ActiveComponent />
             </div>
           </FadeUp>
         </div>
 
-        {/* Desktop: 3 columns in a row */}
+        {/* Desktop: 3 columns */}
         <div className="hidden lg:grid lg:grid-cols-[1fr_auto_1fr_auto_1fr] lg:items-start lg:gap-4">
           <FadeUp delay={0.1}>
-            <p className="mb-2 text-[10px] font-medium uppercase tracking-widest text-white/30">
-              <span className="mr-1.5 inline-flex h-4 w-4 items-center justify-center rounded-full bg-mint-400/10 text-[9px] font-bold text-mint-400">1</span>
-              El cliente escribe
-            </p>
+            <StepNumber n={1} label="El cliente escribe" />
             <Step1Chat />
           </FadeUp>
 
-          <FadeUp delay={0.15} className="mt-32">
+          <FadeUp delay={0.15} className="mt-28">
             <FlowArrow />
           </FadeUp>
 
           <FadeUp delay={0.2}>
-            <p className="mb-2 text-[10px] font-medium uppercase tracking-widest text-white/30">
-              <span className="mr-1.5 inline-flex h-4 w-4 items-center justify-center rounded-full bg-mint-400/10 text-[9px] font-bold text-mint-400">2</span>
-              La IA procesa
-            </p>
+            <StepNumber n={2} label="La IA procesa" />
             <Step2Dashboard />
           </FadeUp>
 
-          <FadeUp delay={0.25} className="mt-32">
+          <FadeUp delay={0.25} className="mt-28">
             <FlowArrow />
           </FadeUp>
 
           <FadeUp delay={0.3}>
-            <p className="mb-2 text-[10px] font-medium uppercase tracking-widest text-white/30">
-              <span className="mr-1.5 inline-flex h-4 w-4 items-center justify-center rounded-full bg-mint-400/10 text-[9px] font-bold text-mint-400">3</span>
-              El vendedor cierra
-            </p>
+            <StepNumber n={3} label="El vendedor cierra" />
             <Step3Quotation />
           </FadeUp>
         </div>
