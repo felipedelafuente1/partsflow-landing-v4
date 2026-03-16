@@ -10,7 +10,7 @@ export function Hero() {
   const { openModal } = useBookingModal();
 
   return (
-    <section className="relative min-h-0 sm:min-h-screen overflow-hidden bg-background pt-20 pb-12 sm:pt-24 sm:pb-20">
+    <section className="relative min-h-0 sm:min-h-screen overflow-hidden bg-background pt-20 pb-8 sm:pt-24 sm:pb-10">
       {/* Background Effects */}
       <div className="pointer-events-none absolute inset-0">
         {/* Radial glow from top */}

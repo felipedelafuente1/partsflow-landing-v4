@@ -76,13 +76,13 @@ const companyLogos = [
 
 function LogoItem({ name, img }: { name: string; img: string }) {
   return (
-    <div className="group flex h-16 w-28 shrink-0 items-center justify-center px-3 sm:w-40 sm:px-6">
+    <div className="group flex h-12 w-24 shrink-0 items-center justify-center px-3 sm:w-32 sm:px-4">
       <Image
         src={img}
         alt={name}
-        width={140}
-        height={48}
-        className="h-8 w-auto max-w-[120px] object-contain opacity-30 brightness-0 invert grayscale transition-all duration-500 group-hover:opacity-90 group-hover:grayscale-0 group-hover:brightness-100 group-hover:invert-0"
+        width={120}
+        height={40}
+        className="h-6 w-auto max-w-[100px] object-contain opacity-40 brightness-0 invert grayscale transition-all duration-500 hover:opacity-100"
         unoptimized
       />
     </div>
@@ -91,17 +91,17 @@ function LogoItem({ name, img }: { name: string; img: string }) {
 
 export function LogoCloud() {
   return (
-    <section className="relative bg-background py-10 sm:py-20">
+    <section className="relative bg-background py-5 sm:py-10">
       <div className="mx-auto max-w-7xl px-6">
         <FadeUp>
-          <p className="text-center text-sm font-medium uppercase tracking-widest text-muted/60">
+          <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-muted/40">
             Empresas que ya aceleran sus ventas con Partsflow
           </p>
         </FadeUp>
 
         {/* Marquee Container */}
         <FadeUp delay={0.1}>
-          <div className="relative mt-6 sm:mt-10 overflow-hidden">
+          <div className="relative mt-4 sm:mt-6 overflow-hidden">
             {/* Fade edges */}
             <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-24 bg-gradient-to-r from-black to-transparent" />
             <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-24 bg-gradient-to-l from-black to-transparent" />
