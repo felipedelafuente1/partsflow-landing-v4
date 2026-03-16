@@ -23,38 +23,38 @@ const messages: ChatMessage[] = [
   {
     id: 1,
     sender: "client",
-    text: "Hola, necesito el kit de distribución para Hilux 2019 diesel",
-    time: "10:23",
+    text: "Necesito un kit de embrague para Toyota Corolla 2003",
+    time: "13:37",
   },
   {
     id: 2,
     sender: "bot",
-    text: "¡Hola! 👋 Encontré 3 opciones para Kit de Distribución Toyota Hilux 2019 2.4D:",
-    time: "10:23",
+    text: "Genial. Para cotizar el kit de embrague, ¿me podrías dar la patente o el número de chasis (VIN) de tu Toyota Corolla 2003?",
+    time: "13:38",
   },
   {
     id: 3,
-    sender: "bot",
-    product: {
-      name: "Kit Distribución Hilux 2.4D",
-      brand: "SKF",
-      price: "$189.990",
-      stock: 12,
-      sku: "VKMA-91710",
-    },
-    time: "10:23",
+    sender: "client",
+    text: "VJ1982",
+    time: "13:39",
   },
   {
     id: 4,
-    sender: "client",
-    text: "Me interesa el SKF, ¿tienen envío a Concepción?",
-    time: "10:24",
+    sender: "bot",
+    text: "Cotizaremos con los siguientes datos:\nPatente: VJ1982\nMarca: Toyota\nModelo: Corolla\nAño: 2003\nProducto(s): kit de embrague\n\nPronto le enviaremos su cotización.",
+    time: "13:39",
   },
   {
     id: 5,
     sender: "bot",
-    text: "✅ Sí, envío a Concepción en 24-48hrs. ¿Te genero la cotización formal?",
-    time: "10:24",
+    product: {
+      name: "Kit Embrague Corolla 1.6",
+      brand: "Valeo",
+      price: "$77.000",
+      stock: 3,
+      sku: "000902703-3",
+    },
+    time: "15:32",
   },
 ];
 
@@ -160,7 +160,7 @@ export function WhatsAppSimulator() {
         </div>
 
         {/* Chat Area */}
-        <div className="flex h-[380px] flex-col gap-2 overflow-y-auto p-4">
+        <div className="flex h-[420px] flex-col gap-2 overflow-y-auto p-4">
           <AnimatePresence mode="popLayout">
             {messages
               .filter((m) => visibleMessages.includes(m.id))
@@ -182,7 +182,7 @@ export function WhatsAppSimulator() {
                     }`}
                   >
                     {msg.text && (
-                      <p className="text-sm leading-relaxed">{msg.text}</p>
+                      <p className="text-sm leading-relaxed whitespace-pre-line">{msg.text}</p>
                     )}
                     {msg.product && <ProductCard product={msg.product} />}
                     <div
