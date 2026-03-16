@@ -10,7 +10,7 @@ export function Hero() {
   const { openModal } = useBookingModal();
 
   return (
-    <section className="relative min-h-0 sm:min-h-screen overflow-hidden bg-background pt-20 pb-12 sm:pt-24 sm:pb-20">
+    <section className="relative min-h-0 sm:min-h-screen overflow-hidden bg-background pt-20 sm:pt-24">
       {/* Background Effects */}
       <div className="pointer-events-none absolute inset-0">
         {/* Radial glow from top */}
@@ -77,12 +77,12 @@ export function Hero() {
             </div>
           </FadeUp>
 
-          {/* WhatsApp Simulator */}
+          {/* WhatsApp Simulator
           <FadeUp delay={0.5}>
             <div className="mt-10 sm:mt-16 w-full max-w-lg animate-float">
               <WhatsAppSimulator />
             </div>
-          </FadeUp>
+          </FadeUp> */}
         </div>
       </div>
     </section>
