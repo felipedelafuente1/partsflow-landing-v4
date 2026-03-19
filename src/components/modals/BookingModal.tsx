@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { MoveRight, X, ArrowLeft } from "lucide-react";
 import { BorderBeam } from "@/components/ui/border-beam";
+import { trackEvent } from "@/lib/analytics";
 
 interface BookingModalProps {
   isOpen: boolean;
@@ -81,8 +82,10 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
   function handleSubmitStep1(e: FormEvent) {
     e.preventDefault();
 
-    // Future API integration point
-    console.log("📋 Booking data:", formData);
+    trackEvent("demo_form_submit", {
+      chat_volume: formData.chatVolume,
+      erp: formData.erp,
+    });
 
     setStep(2);
   }

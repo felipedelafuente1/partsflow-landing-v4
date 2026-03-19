@@ -1,5 +1,5 @@
 import { BookingModalProvider } from "@/context/BookingModalContext";
 
-export default function CasosLayout({ children }: { children: React.ReactNode }) {
+export default function BlogLayout({ children }: { children: React.ReactNode }) {
   return <BookingModalProvider>{children}</BookingModalProvider>;
 }

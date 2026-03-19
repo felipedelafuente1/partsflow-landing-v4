@@ -1,5 +1,7 @@
 "use client";
 
+import { trackWhatsAppClick } from "@/lib/analytics";
+
 const WA_HREF =
   "https://wa.me/56988886542?text=Hola%2C%20tengo%20una%20consulta%20sobre%20Partsflow";
 
@@ -10,6 +12,7 @@ export function WhatsAppWidget() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Contactar por WhatsApp"
+      onClick={() => trackWhatsAppClick()}
       className="group fixed bottom-5 right-5 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-black/70 border border-white/10 shadow-lg backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:border-[#25D366]/40 hover:bg-[#25D366]/15 sm:h-13 sm:w-13"
     >
       {/* WhatsApp SVG icon */}

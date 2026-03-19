@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, useCallback } from "react";
 import { BookingModal } from "@/components/modals/BookingModal";
+import { trackDemoBooking } from "@/lib/analytics";
 
 interface BookingModalContextType {
   isOpen: boolean;
@@ -20,7 +21,10 @@ export function useBookingModal() {
 export function BookingModalProvider({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const openModal = useCallback(() => setIsOpen(true), []);
+  const openModal = useCallback(() => {
+    trackDemoBooking();
+    setIsOpen(true);
+  }, []);
   const closeModal = useCallback(() => setIsOpen(false), []);
 
   return (

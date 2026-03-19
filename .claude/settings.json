@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sort -t: -k2 -rn)",
+      "Bash(grep -E \"\\\\.\\(xml|txt|json\\)$\")"
+    ]
+  }
+}
