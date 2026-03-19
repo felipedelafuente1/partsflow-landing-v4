@@ -3,6 +3,7 @@
 import { FadeUp } from "@/components/animations/FadeUp";
 import { RetroGrid } from "@/components/ui/retro-grid";
 import { WhatsAppSimulator } from "@/components/sections/WhatsAppSimulator";
+import { LogoCloud } from "@/components/sections/LogoCloud";
 import { ArrowRight, Play } from "lucide-react";
 import { useBookingModal } from "@/context/BookingModalContext";
 
@@ -38,7 +39,7 @@ export function Hero() {
           {/* Headline */}
           <FadeUp delay={0.1}>
             <h1 className="max-w-4xl text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-              Tu local nunca cierra.
+              Tu tienda de repuestos nunca cierra.
               <br />
               <span className="text-gradient-mint">
                 Partsflow prepara tus ventas 24/7.
@@ -83,6 +84,11 @@ export function Hero() {
               <WhatsAppSimulator />
             </div>
           </FadeUp> */}
+        </div>
+
+        {/* Logo Cloud */}
+        <div className="mt-10 sm:mt-16">
+          <LogoCloud compact />
         </div>
       </div>
     </section>

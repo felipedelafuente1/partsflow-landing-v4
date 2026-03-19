@@ -3,96 +3,50 @@
 import { FadeUp } from "@/components/animations/FadeUp";
 import Image from "next/image";
 
-const companyLogos = [
-  {
-    name: "Repuestos del Sol",
-    img: "https://imagenes-web-cr.s3.amazonaws.com/empresas-repuestos/rds.png",
-  },
-  {
-    name: "Piamonte",
-    img: "https://www.piamonte.cl/wp-content/uploads/2024/10/logo-piamonte-300x51px-2024.png",
-  },
-  {
-    name: "Volkswagen Chile",
-    img: "https://www.vw-store.cl/media/.renditions/wysiwyg/Volkswagen/Footer/logo-volkswagen-footer.png",
-  },
-  {
-    name: "Fitalia",
-    img: "https://cdn.shopify.com/s/files/1/0519/4439/0828/files/LOGO_FITALIA_Mesa_de_trabajo_1_d59dfd42-7b73-4181-a58e-e161c3abbe4b.png?v=1692653215",
-  },
-  {
-    name: "Miguel Jacob Helo",
-    img: "https://mutatis.cl/wp-content/uploads/2022/09/mjh-logo.png",
-  },
-  {
-    name: "Automotora Bilbao",
-    img: "https://www.autored.cl/assets/landing/images/clients/15-dea6d96a9aeb330fe626fe0802ca447c.png",
-  },
-  {
-    name: "Maria Soto",
-    img: "https://www.msrepuestos.cl/cdn/shop/files/LOGOMS_3cf2f2ba-0cd4-41b5-a345-02da7b03fd61.jpg?v=1750350018&width=500",
-  },
-  {
-    name: "Daitodisam",
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwFgG0cgDaPzwUXvoDi3wl3gRs2WJyc6bIZA&s",
-  },
-  {
-    name: "Inalco",
-    img: "https://www.inalcochevrolet.cl/content/dam/chevrolet/sa/cl/es/258031/primary-nav/logo-sep-2025/inalco-logo.png",
-  },
-  {
-    name: "Bustamante",
-    img: "https://bustamanteycia.cl/images/logo.png",
-  },
-  {
-    name: "Bolomey",
-    img: "https://media.licdn.com/dms/image/v2/C4D0BAQHxCfFzlxdsvg/company-logo_200_200/company-logo_200_200/0/1630578258676?e=1766016000&v=beta&t=rMD-x9-5R6_5pYtge-Avj3fHSygAuPpY0BzgJzgxTEE",
-  },
-  {
-    name: "DT Parts",
-    img: "https://http2.mlstatic.com/D_NQ_NP_754496-MLA90368624033_082025-O.webp",
-  },
-  {
-    name: "Ekipate",
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS27KsqzfNxKrElfxSx0yYmDbj7KIzzaUtScg&s",
-  },
-  {
-    name: "Carparts",
-    img: "https://http2.mlstatic.com/storage/mshops-appearance-api/images/92/740581292/logo-2024091009334548562.png",
-  },
-  {
-    name: "Autostock",
-    img: "https://autostock.cl/wp-content/themes/autostock-theme-wp-main/img/logo.svg",
-  },
-  {
-    name: "Euroespecialista",
-    img: "https://www.euroespecialista.cl/images/euroespecialista.jpg",
-  },
-  {
-    name: "Monzaparts",
-    img: "https://monzaparts.cl/wp-content/uploads/2025/10/Logo-Monza.svg",
-  },
+const companies: { name: string; img?: string }[] = [
+  { name: "Repuestos del Sol", img: "/logos/repuestos-del-sol.png" },
+  { name: "Piamonte", img: "/logos/piamonte.png" },
+  { name: "Volkswagen Chile", img: "/logos/volkswagen.png" },
+  { name: "Fitalia", img: "/logos/fitalia.png" },
+  { name: "Miguel Jacob Helo", img: "/logos/miguel-jacob-helo.png" },
+  { name: "Automotora Bilbao", img: "/logos/automotora-bilbao.png" },
+  { name: "Maria Soto", img: "/logos/maria-soto.png" },
+  { name: "Daitodisam", img: "/logos/daitodisam.png" },
+  { name: "Inalco", img: "/logos/inalco.png" },
+  { name: "Bustamante", img: "/logos/bustamante.png" },
+  { name: "Bolomey", img: "/logos/bolomey.png" },
+  { name: "DT Parts", img: "/logos/dt-parts.png" },
+  { name: "Ekipate", img: "/logos/ekipate.png" },
+  { name: "Carparts", img: "/logos/carparts.png" },
+  { name: "Autostock", img: "/logos/autostock.png" },
+  { name: "Euroespecialista", img: "/logos/euroespecialista.png" },
+  { name: "Monzaparts", img: "/logos/monzaparts.png" },
 ];
 
-function LogoItem({ name, img }: { name: string; img: string }) {
+function LogoItem({ name, img }: { name: string; img?: string }) {
   return (
-    <div className="group flex h-12 w-24 shrink-0 items-center justify-center px-3 sm:w-32 sm:px-4">
-      <Image
-        src={img}
-        alt={name}
-        width={120}
-        height={40}
-        className="h-6 w-auto max-w-[100px] object-contain opacity-40 brightness-0 invert grayscale transition-all duration-500 hover:opacity-100"
-        unoptimized
-      />
+    <div className="group flex h-12 shrink-0 items-center justify-center px-4 sm:px-6">
+      {img ? (
+        <Image
+          src={img}
+          alt={name}
+          width={120}
+          height={40}
+          className="h-6 w-auto max-w-[100px] object-contain opacity-30 brightness-0 invert grayscale transition-all duration-500 group-hover:opacity-70"
+        />
+      ) : (
+        <span className="whitespace-nowrap text-xs font-semibold uppercase tracking-wider text-white/30 transition-all duration-500 group-hover:text-white/70 sm:text-sm">
+          {name}
+        </span>
+      )}
     </div>
   );
 }
 
-export function LogoCloud() {
+export function LogoCloud({ compact = false }: { compact?: boolean }) {
   return (
-    <section className="relative bg-background py-5 sm:py-10">
-      <div className="mx-auto max-w-7xl px-6">
+    <section className={`relative bg-background ${compact ? "py-0" : "py-5 sm:py-10"}`}>
+      <div className={`mx-auto max-w-7xl ${compact ? "" : "px-6"}`}>
         <FadeUp>
           <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-muted/40">
             Empresas que ya aceleran sus ventas con Partsflow
@@ -108,11 +62,11 @@ export function LogoCloud() {
 
             {/* Scrolling row */}
             <div className="flex animate-[marquee_18s_linear_infinite] hover:[animation-play-state:paused]">
-              {companyLogos.map((logo) => (
+              {companies.map((logo) => (
                 <LogoItem key={logo.name} name={logo.name} img={logo.img} />
               ))}
               {/* Duplicate for seamless loop */}
-              {companyLogos.map((logo) => (
+              {companies.map((logo) => (
                 <LogoItem
                   key={`dup-${logo.name}`}
                   name={logo.name}
