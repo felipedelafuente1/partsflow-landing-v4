@@ -183,32 +183,138 @@ Agregar como **observación** (no restricción) para ajustar pujas:
 
 ---
 
-## 5. Presupuesto Recomendado
+## 5. Presupuesto y Plan de Escalamiento
 
-### Fase 1: Testeo (Mes 1-2)
+### Fase 0: Micro-Budget / Validación (Mes 1-2) — $100.000 CLP/mes
+
+> **Realidad con $100K**: Son ~$3.300 CLP/día. Con un CPC estimado de $1.500-2.500 CLP
+> en el nicho B2B automotriz Chile, eso da **1-2 clicks por día** (~40-60 clicks/mes).
+> Es poco, pero **suficiente para validar** si las keywords convierten.
+
 | Concepto | Monto Mensual |
 |----------|--------------|
-| Campaña Search (Intención Alta) | $400.000 CLP |
-| Campaña Marca | $50.000 CLP |
-| **Total** | **$450.000 CLP (~USD $450)** |
+| 1 sola campaña Search (ultra-focalizada) | $100.000 CLP |
+| Campaña Marca | $0 (aún no necesaria) |
+| Remarketing | $0 (aún no hay audiencia) |
+| **Total** | **$100.000 CLP (~USD $100)** |
 
-**Meta**: 15-25 clicks/día, 2-4 demos agendadas/semana.
+**Estrategia con $100K — "Francotirador":**
+1. **Solo 1 grupo de anuncios** con las 5 keywords de mayor intención de compra:
+   - `software para venta de repuestos`
+   - `chatbot whatsapp autopartes`
+   - `automatizar ventas repuestos`
+   - `sistema venta autopartes chile`
+   - `software repuestos automotrices`
+2. **Solo concordancia de frase** (no amplia) para no desperdiciar
+3. **Solo Santiago (RM)** como ubicación — concentrar donde hay más mercado
+4. **Solo Lun-Vie 9:00-18:00** — horario peak de dueños/jefes buscando soluciones
+5. **Puja manual de CPC** — controlar exactamente cuánto pagas por click
+6. **1 solo anuncio bien trabajado** — el Anuncio 1 (enfoque en dolor)
 
-### Fase 2: Optimización (Mes 3-4)
+**Meta Fase 0**: 40-60 clicks/mes, **1-2 demos agendadas/mes**. El objetivo real no es volumen, es **aprender**:
+- ¿Qué keywords generan clicks?
+- ¿Qué búsquedas reales hace la gente? (ver "Términos de búsqueda")
+- ¿Cuánto cuesta realmente un click en este nicho?
+- ¿El landing convierte tráfico pagado?
+
+**Criterio para escalar**: Si con $100K logras al menos 1 demo y ves CTR >3%, ya tienes señal para subir presupuesto.
+
+---
+
+### Plan de Optimización Progresiva (Cómo ir Mejorando)
+
+#### Semana 1-2: Aprender
+- Revisar **"Términos de búsqueda"** diariamente en Google Ads
+- Agregar como keywords negativas todo lo irrelevante que aparezca
+- Anotar qué términos reales usa la gente (puede sorprenderte)
+- Verificar que las conversiones se están trackeando
+
+#### Semana 3-4: Ajustar
+- **Pausar keywords con 20+ clicks y 0 conversiones** — no funcionan
+- **Subir puja en keywords con buen CTR** — merecen más visibilidad
+- **A/B testear**: Agregar una segunda variación de anuncio
+- **Revisar Quality Score**: Si es <5, mejorar relevancia del anuncio vs. keyword
+
+#### Mes 2: Decisión
+- Si **0 demos**: Revisar landing page, cambiar keywords, o considerar que el canal no es el adecuado aún
+- Si **1 demo**: Señal positiva. Mantener $100K y seguir optimizando
+- Si **2+ demos**: Señal fuerte. Hora de escalar a Fase 1
+
+---
+
+### Fase 1: Testeo Serio (Mes 3-4) — $300.000-$450.000 CLP/mes
 | Concepto | Monto Mensual |
 |----------|--------------|
-| Campaña Search (optimizada) | $600.000 CLP |
+| Campaña Search (2-3 grupos de anuncios) | $350.000 CLP |
+| Campaña Marca (si hay búsquedas de "partsflow") | $50.000 CLP |
+| **Total** | **$400.000 CLP (~USD $400)** |
+
+**Qué cambia vs Fase 0:**
+- Agregar los 3 grupos de anuncios completos (Software, Automatización, Dolor)
+- Expandir geo a Valparaíso y Concepción
+- Activar horario extendido (8:00-20:00)
+- Probar concordancia amplia modificada en keywords ganadoras
+- Cambiar a **"Maximizar conversiones"** como estrategia de puja (si tienes >15 conversiones acumuladas)
+
+**Meta**: 8-12 clicks/día, **4-8 demos/mes**
+
+### Fase 2: Optimización (Mes 5-6) — $800.000 CLP/mes
+| Concepto | Monto Mensual |
+|----------|--------------|
+| Campaña Search (optimizada con datos reales) | $600.000 CLP |
 | Remarketing Display | $150.000 CLP |
 | Campaña Marca | $50.000 CLP |
 | **Total** | **$800.000 CLP (~USD $800)** |
 
-**Meta**: Duplicar demos manteniendo CPA objetivo.
+**Qué cambia:**
+- Activar **remarketing** (ya tendrás audiencia suficiente)
+- Crear **landing page dedicada** `/demo` para mejorar conversión
+- Usar **audiencias similares** basadas en visitantes convertidos
+- Implementar **Target CPA** como estrategia de puja
 
-### Fase 3: Escala (Mes 5+)
+**Meta**: 15-25 clicks/día, **8-16 demos/mes**
+
+### Fase 3: Escala (Mes 7+) — $1.500.000+ CLP/mes
 Escalar según CPA real y ROI medido. Si una demo tiene una tasa de cierre del 20% y el ticket promedio es $350.000 CLP/mes:
 - **LTV estimado (12 meses)**: $4.200.000 CLP
 - **Valor de una demo**: ~$840.000 CLP (20% cierre × LTV)
 - **CPA objetivo máximo**: $200.000 CLP por demo (da un ROAS de 4x)
+- Activar YouTube Ads, Performance Max, y keywords de competidores
+
+---
+
+### Ciclo de Optimización Continua (aplicar siempre)
+
+```
+Cada semana:
+┌─────────────────────────────────────────────┐
+│  1. MEDIR  →  Revisar métricas clave        │
+│  2. LIMPIAR → Agregar keywords negativas     │
+│  3. PODAR  →  Pausar lo que no convierte     │
+│  4. NUTRIR →  Subir puja en lo que funciona  │
+│  5. PROBAR →  Testear 1 cambio a la vez      │
+└─────────────────────────────────────────────┘
+
+Cada mes:
+┌─────────────────────────────────────────────┐
+│  • Calcular CPA real vs objetivo             │
+│  • Decidir: mantener, subir o bajar budget   │
+│  • Agregar/quitar keywords según datos       │
+│  • Refrescar copy de anuncios                │
+│  • Revisar competencia (¿aparecen nuevos?)   │
+└─────────────────────────────────────────────┘
+```
+
+### Señales para Subir Presupuesto
+- CPA por demo < $50.000 CLP → duplicar presupuesto agresivamente
+- CPA entre $50.000-$100.000 CLP → subir 30-50%
+- CPA entre $100.000-$150.000 CLP → mantener y optimizar
+- CPA > $150.000 CLP → pausar y replantear (keywords, landing, o canal)
+
+### Señales para Pausar/Cambiar
+- CTR < 2% después de 200 impresiones → el anuncio no conecta
+- 50+ clicks sin ninguna conversión → el landing o la oferta tiene problemas
+- Quality Score < 4 → Google te está cobrando de más, mejorar relevancia
 
 ---
 
