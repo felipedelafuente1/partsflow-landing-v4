@@ -3,7 +3,7 @@
 import { trackWhatsAppClick } from "@/lib/analytics";
 
 const WA_HREF =
-  "https://wa.me/56988886542?text=Hola%2C%20tengo%20una%20consulta%20sobre%20Partsflow";
+  "https://wa.me/56968489100?text=Hola%2C%20tengo%20una%20consulta%20sobre%20Partsflow";
 
 export function WhatsAppWidget() {
   return (

@@ -46,31 +46,35 @@ export function YouTubeShort({
 
   return (
     <>
-      {/* Preview: iframe with clickable overlay */}
-      <div
-        className={`group relative w-full overflow-hidden rounded-2xl border border-white/10 bg-black ${className}`}
+      {/* Thumbnail */}
+      <button
+        onClick={() => setOpen(true)}
+        className={`group relative w-full overflow-hidden rounded-2xl border border-white/10 bg-black focus:outline-none focus-visible:ring-2 focus-visible:ring-mint-400 ${className}`}
+        aria-label={`Ver video testimonio de ${company}`}
       >
         <div className="relative aspect-video">
-          {/* YouTube embed as poster (no autoplay, no controls) */}
-          <iframe
-            src={`https://www.youtube.com/embed/${videoId}?rel=0&controls=0&showinfo=0&modestbranding=1`}
-            title={`Testimonio de ${company}`}
-            allow="encrypted-media"
-            className="pointer-events-none h-full w-full"
+          {/* Try hq720 first (works for Shorts), fallback to sddefault */}
+          <img
+            src={`https://i.ytimg.com/vi/${videoId}/hq720.jpg`}
+            alt={`Testimonio de ${company}`}
+            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
             loading="lazy"
+            onError={(e) => {
+              const img = e.currentTarget;
+              if (!img.dataset.fallback) {
+                img.dataset.fallback = "1";
+                img.src = `https://i.ytimg.com/vi/${videoId}/sddefault.jpg`;
+              }
+            }}
           />
-          {/* Clickable overlay */}
-          <button
-            onClick={() => setOpen(true)}
-            className="absolute inset-0 z-10 flex cursor-pointer items-center justify-center bg-black/20 transition-colors duration-300 hover:bg-black/10"
-            aria-label={`Ver video testimonio de ${company}`}
-          >
+          <div className="absolute inset-0 bg-black/20 transition-colors duration-300 group-hover:bg-black/10" />
+          <div className="absolute inset-0 flex items-center justify-center">
             <div className="flex h-16 w-16 items-center justify-center rounded-full border border-white/30 bg-black/50 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110">
               <Play size={24} className="ml-0.5 fill-white text-white" />
             </div>
-          </button>
+          </div>
         </div>
-      </div>
+      </button>
 
       {/* Modal */}
       {open && (

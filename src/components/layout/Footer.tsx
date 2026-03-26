@@ -184,7 +184,7 @@ export function Footer() {
                 Términos y Condiciones
               </a>
               <a
-                href="https://wa.me/56900000000?text=Hola%2C%20quiero%20saber%20más%20sobre%20Partsflow"
+                href="https://wa.me/56968489100?text=Hola%2C%20quiero%20saber%20más%20sobre%20Partsflow"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-[11px] font-medium text-mint-400/70 transition-colors hover:text-mint-400"
