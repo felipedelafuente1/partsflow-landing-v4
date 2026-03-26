@@ -46,32 +46,31 @@ export function YouTubeShort({
 
   return (
     <>
-      {/* Thumbnail */}
+      {/* Styled play card */}
       <button
         onClick={() => setOpen(true)}
-        className={`group relative w-full overflow-hidden rounded-2xl border border-white/10 bg-black focus:outline-none focus-visible:ring-2 focus-visible:ring-mint-400 ${className}`}
+        className={`group relative w-full overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.06] to-white/[0.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-mint-400 ${className}`}
         aria-label={`Ver video testimonio de ${company}`}
       >
-        <div className="relative aspect-video">
-          {/* Try hq720 first (works for Shorts), fallback to sddefault */}
-          <img
-            src={`https://i.ytimg.com/vi/${videoId}/hq720.jpg`}
-            alt={`Testimonio de ${company}`}
-            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-            loading="lazy"
-            onError={(e) => {
-              const img = e.currentTarget;
-              if (!img.dataset.fallback) {
-                img.dataset.fallback = "1";
-                img.src = `https://i.ytimg.com/vi/${videoId}/sddefault.jpg`;
-              }
+        <div className="relative flex aspect-video flex-col items-center justify-center gap-4 px-6">
+          {/* Subtle grid pattern */}
+          <div
+            className="pointer-events-none absolute inset-0 opacity-[0.07]"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)",
+              backgroundSize: "32px 32px",
             }}
           />
-          <div className="absolute inset-0 bg-black/20 transition-colors duration-300 group-hover:bg-black/10" />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="flex h-16 w-16 items-center justify-center rounded-full border border-white/30 bg-black/50 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110">
-              <Play size={24} className="ml-0.5 fill-white text-white" />
-            </div>
+          {/* Play button */}
+          <div className="relative flex h-16 w-16 items-center justify-center rounded-full border border-mint-400/30 bg-mint-400/10 transition-all duration-300 group-hover:scale-110 group-hover:border-mint-400/50 group-hover:bg-mint-400/20">
+            <Play size={26} className="ml-1 fill-mint-400 text-mint-400" />
+          </div>
+          <div className="relative text-center">
+            <p className="text-sm font-semibold text-white/70 transition-colors group-hover:text-white/90">
+              Ver testimonio
+            </p>
+            <p className="mt-0.5 text-xs text-white/30">{company}</p>
           </div>
         </div>
       </button>
