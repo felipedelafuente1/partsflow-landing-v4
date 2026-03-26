@@ -38,7 +38,7 @@ export const casos: Caso[] = [
     company: "Euro Especialista",
     location: "Chile",
     headline:
-      "Cómo Euro Especialista pasó de un WhatsApp básico a tener data completa de su operación",
+      "Cómo Euro Especialista pasó de un CRM generalista a tener data completa de su operación",
     metric: "Data en tiempo real",
     metricSub: "De productos, vendedores y chats",
     problem:
@@ -47,7 +47,7 @@ export const casos: Caso[] = [
     videoUrl: "https://www.youtube.com/shorts/_BnNm6BvpEw",
     quote:
       '"Antiguamente trabajamos con otro sistema pero era demasiado básico, solo para contestar. Hoy en día después de que llegó Partsflow hemos tenido bastantes cambios, sobre todo en lo que es recopilación de información."',
-    quoteAuthor: "— Felipe, Euro Especialista",
+    quoteAuthor: "— Felipe, Jefe de Ventas, Euro Especialista",
     metrics: [
       {
         value: "100%",
