@@ -149,7 +149,7 @@ export const casos: Caso[] = [
     company: "Repuestos del Sol",
     location: "Chile",
     headline:
-      "Cómo Repuestos del Sol creció sin contratar más vendedores",
+      "Cómo Repuestos del Sol creció más del doble sin contratar más vendedores",
     metric: "Más ventas, mismo equipo",
     metricSub: "Crecimiento sin sumar vendedores",
     problem:
@@ -187,7 +187,7 @@ export const casos: Caso[] = [
     ],
     resultsTitle: "Crecimiento eficiente con el mismo equipo",
     resultsBody:
-      "Con Partsflow, Repuestos del Sol pudo responder más chats sin sumar vendedores. Aumentaron las ventas de su ecommerce propio y ahora tienen data completa de cómo funciona su operación y cómo atiende cada vendedor.",
+      "Con Partsflow, Repuestos del Sol pudo responder más chats sin sumar vendedores. Aumentaron las ventas de su ecommerce propio más del doble y ahora tienen data completa de cómo funciona su operación y cómo atiende cada vendedor.",
     resultsPoints: [
       "Responden más chats sin contratar más vendedores",
       "Aumentaron las ventas de su ecommerce propio",
