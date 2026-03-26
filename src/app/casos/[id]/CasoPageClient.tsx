@@ -2,36 +2,12 @@
 
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Play, CheckCircle2, MoveRight } from "lucide-react";
+import { ArrowLeft, CheckCircle2, MoveRight } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { BorderBeam } from "@/components/ui/border-beam";
+import { YouTubeShort } from "@/components/ui/YouTubeShort";
 import { useBookingModal } from "@/context/BookingModalContext";
 import { getCaso, isFullCase, casos, getCasoHref } from "@/lib/casos";
-
-function VideoPlaceholder({ company }: { company: string }) {
-  return (
-    <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-white/10 bg-white/[0.03] flex items-center justify-center">
-      <div className="absolute inset-0 bg-gradient-to-br from-white/[0.04] to-white/[0.01]" />
-      <div
-        className="absolute inset-0 opacity-20"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
-        }}
-      />
-      <div className="relative flex flex-col items-center gap-4 text-center px-6">
-        <div className="flex h-16 w-16 items-center justify-center rounded-full border border-white/20 bg-white/5">
-          <Play size={24} className="translate-x-0.5 text-white/40" />
-        </div>
-        <div>
-          <p className="text-sm font-semibold text-white/50">Video próximamente</p>
-          <p className="mt-1 text-xs text-white/30">Testimonio de {company}</p>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 export default function CasoPageClient({ casoId }: { casoId: string }) {
   const { openModal } = useBookingModal();
@@ -95,7 +71,13 @@ export default function CasoPageClient({ casoId }: { casoId: string }) {
           </div>
 
           {/* Video */}
-          <VideoPlaceholder company={caso.company} />
+          {caso.videoUrl ? (
+            <YouTubeShort url={caso.videoUrl} company={caso.company} />
+          ) : (
+            <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-white/10 bg-white/[0.03] flex items-center justify-center">
+              <p className="text-sm font-semibold text-white/50">Video próximamente</p>
+            </div>
+          )}
 
           {/* Pull quote */}
           {caso.quote && (

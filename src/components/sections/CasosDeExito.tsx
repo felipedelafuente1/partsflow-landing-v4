@@ -1,14 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { FadeUp } from "@/components/animations/FadeUp";
+import { YouTubeShort } from "@/components/ui/YouTubeShort";
 import { casos, getCasoHref } from "@/lib/casos";
 
 const roleMap: Record<string, string> = {
-  piamonte: "GERENCIA",
-  inalco: "OPERACIONES",
-  "repuestos-del-sol": "VENTAS",
+  "euro-especialista": "VENTAS",
+  "maria-soto": "ECOMMERCE",
+  "repuestos-del-sol": "GERENCIA COMERCIAL",
 };
 
 const accentBorderMap: Record<string, string> = {
@@ -48,23 +49,25 @@ export function CasosDeExito() {
 
             return (
               <FadeUp key={c.id} delay={i * 0.15}>
-                <div className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-white/5 backdrop-blur-sm transition-colors duration-300 hover:border-white/15">
-                  {/* Video placeholder */}
-                  <div
-                    className={`relative flex aspect-video items-center justify-center bg-zinc-800/80 border-b ${accentBorder}`}
-                  >
-                    <div className="flex flex-col items-center gap-2">
-                      <div className="flex h-14 w-14 items-center justify-center rounded-full border border-white/10 bg-white/5 transition-transform duration-300 group-hover:scale-110">
-                        <Play
-                          size={22}
-                          className="ml-0.5 fill-white/60 text-white/60"
-                        />
-                      </div>
+                <div className="group/card flex h-full flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-white/5 backdrop-blur-sm transition-colors duration-300 hover:border-white/15">
+                  {/* Video thumbnail */}
+                  {c.videoUrl ? (
+                    <div className={`border-b ${accentBorder}`}>
+                      <YouTubeShort
+                        url={c.videoUrl}
+                        company={c.company}
+                        className="rounded-none rounded-t-2xl border-0"
+                      />
+                    </div>
+                  ) : (
+                    <div
+                      className={`relative flex aspect-video items-center justify-center bg-zinc-800/80 border-b ${accentBorder}`}
+                    >
                       <span className="font-mono text-[10px] text-white/25 uppercase tracking-widest">
                         Video próximamente
                       </span>
                     </div>
-                  </div>
+                  )}
 
                   {/* Content */}
                   <div className="flex flex-1 flex-col p-6">
@@ -98,7 +101,7 @@ export function CasosDeExito() {
                       Ver caso de éxito completo
                       <ArrowRight
                         size={14}
-                        className="transition-transform group-hover:translate-x-1"
+                        className="transition-transform group-hover/card:translate-x-1"
                       />
                     </Link>
                   </div>

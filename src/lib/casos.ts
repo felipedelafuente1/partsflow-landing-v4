@@ -1,4 +1,4 @@
-import { MessageSquare, Truck, Sun, type LucideIcon } from "lucide-react";
+import { MessageSquare, ShoppingCart, Sun, type LucideIcon } from "lucide-react";
 
 export type CasoMetric = { value: string; label: string; sub: string };
 
@@ -15,6 +15,7 @@ export type Caso = {
   metricSub: string;
   problem: string;
   logo: string;
+  videoUrl?: string;
   // Full page fields — undefined means teaser only
   quote?: string;
   quoteAuthor?: string;
@@ -29,71 +30,114 @@ export type Caso = {
 
 export const casos: Caso[] = [
   {
-    id: "piamonte",
+    id: "euro-especialista",
     icon: MessageSquare,
     iconHexColor: "#4ade80",
     accentColor: "mint",
     category: "Repuestos automotriz",
-    company: "Piamonte Repuestos",
-    location: "Santiago, Chile",
-    headline: "Cómo Partsflow ayudó a Piamonte a duplicar sus cotizaciones",
-    metric: "Tasa de cotización duplicada",
-    metricSub: "En los primeros 60 días",
+    company: "Euro Especialista",
+    location: "Chile",
+    headline:
+      "Cómo Euro Especialista pasó de un WhatsApp básico a tener data completa de su operación",
+    metric: "Data en tiempo real",
+    metricSub: "De productos, vendedores y chats",
     problem:
-      "Sus vendedores pasaban más tiempo buscando códigos OEM que cerrando ventas. El cuello de botella era el trabajo manual previo a cotizar.",
+      "Trabajaban con un sistema demasiado básico, solo para contestar. No tenían datos de productos, vendedores ni de cómo se estaba atendiendo.",
     logo: "🏢",
+    videoUrl: "https://www.youtube.com/shorts/_BnNm6BvpEw",
     quote:
-      '"Partsflow cambió completamente nuestra forma de vender. Ahora nuestros vendedores se enfocan en cerrar, no en buscar códigos."',
-    quoteAuthor: "— Piamonte Repuestos",
+      '"Antiguamente trabajamos con otro sistema pero era demasiado básico, solo para contestar. Hoy en día después de que llegó Partsflow hemos tenido bastantes cambios, sobre todo en lo que es recopilación de información."',
+    quoteAuthor: "— Felipe, Euro Especialista",
     metrics: [
-      { value: "2x", label: "Cotizaciones", sub: "Tasa de cotización duplicada" },
-      { value: "< 1 min", label: "Tiempo respuesta", sub: "Respuesta automática" },
-      { value: "100%", label: "Chats atendidos", sub: "Ningún chat sin responder" },
+      {
+        value: "100%",
+        label: "Chats atendidos",
+        sub: "Pueden responder todo lo que entra",
+      },
+      {
+        value: "Tiempo real",
+        label: "Data de productos",
+        sub: "Vendidos, sin stock y oportunidades",
+      },
+      {
+        value: "Priorización",
+        label: "Chats priorizados",
+        sub: "Foco en los chats que importan",
+      },
     ],
-    challengeTitle: "Demasiado trabajo manual antes de poder cotizar",
+    challengeTitle: "Sin visibilidad ni datos de su operación",
     challengeBody:
-      "Piamonte Repuestos recibía cientos de consultas diarias por WhatsApp. Sus vendedores pasaban más tiempo buscando códigos OEM y pidiendo datos técnicos que cerrando ventas. El cuello de botella era claro: demasiado trabajo manual antes de poder cotizar.",
-    resultsTitle: "Vendedores enfocados en cerrar, no en buscar",
+      "Euro Especialista trabajaba solo con WhatsApp y un sistema demasiado básico que solo servía para contestar. No tenían forma de saber cómo se estaba atendiendo, qué productos se pedían, ni cómo rendían sus vendedores. Muchos chats quedaban sin responder.",
+    challengePoints: [
+      "Solo funcionaban con WhatsApp, sin herramientas de gestión",
+      "No sabían cómo se estaba atendiendo a los clientes",
+      "No tenían data de los productos que se pedían",
+      "No tenían visibilidad del rendimiento de sus vendedores",
+      "No podían responder todos los chats que llegaban",
+    ],
+    resultsTitle: "Datos, priorización y más capacidad de respuesta",
     resultsBody:
-      "Con Partsflow, la IA se encarga de filtrar clientes, pedir datos técnicos y buscar códigos OEM automáticamente. Los vendedores ahora reciben la \"mesa servida\" y solo se dedican a poner precio y cerrar. Duplicaron su tasa de cotización en el primer mes.",
+      "Con Partsflow, Euro Especialista pasó de un sistema básico a tener control total de su operación. Ahora saben exactamente cuántos chats entran, qué productos se venden y cuáles no tienen en stock, y cómo atiende cada vendedor.",
     resultsPoints: [
-      "Tasa de cotización duplicada en 60 días",
-      "Respuesta automática en menos de 1 minuto",
-      "100% de chats atendidos, sin excepciones",
+      "Saben la cantidad exacta de chats que están entrando",
+      "Tienen data de productos vendidos y sin stock",
+      "Tienen data de cómo responden sus vendedores",
+      "Aumentaron ventas priorizando los chats que importan",
+      "Aumentaron la rapidez de respuesta",
     ],
   },
   {
-    id: "inalco",
-    icon: Truck,
+    id: "maria-soto",
+    icon: ShoppingCart,
     iconHexColor: "#3b82f6",
     accentColor: "electric",
-    category: "Distribución de repuestos",
-    company: "Inalco",
+    category: "Repuestos automotriz",
+    company: "María Soto",
     location: "Chile",
-    headline: "Partsflow redujo el tiempo de respuesta de Inalco en un 60%",
-    metric: "+35% ventas cerradas por mes",
-    metricSub: "98% satisfacción de clientes",
+    headline:
+      "Cómo María Soto aumentó sus ventas un 34% en 3 meses con visibilidad total",
+    metric: "+34% ventas en 3 meses",
+    metricSub: "Con control total del canal online",
     problem:
-      "Tiempos de respuesta lentos hacían que clientes se fueran con la competencia antes de recibir una cotización.",
-    logo: "🚛",
+      "No podían responder todos los chats y no tenían visibilidad de cómo funcionaban sus vendedores en el canal online.",
+    logo: "🛒",
+    videoUrl: "https://www.youtube.com/shorts/dl_-paC_MmE",
     quote:
-      '"La velocidad de respuesta que logramos con Partsflow nos diferencia de la competencia. Los clientes notan la diferencia."',
-    quoteAuthor: "— Inalco",
+      '"Para mí como encargado de ecommerce, lo que encuentro más beneficioso es que te da la capacidad de tener bajo control a los vendedores en el canal online, y también de cómo estamos con nuestros clientes."',
+    quoteAuthor: "— Matías, Encargado de Ecommerce, María Soto",
     metrics: [
-      { value: "-60%", label: "Tiempo", sub: "Reducción en tiempo de respuesta" },
-      { value: "+35%", label: "Ventas cerradas", sub: "Más cierres por mes" },
-      { value: "98%", label: "Satisfacción", sub: "Clientes satisfechos" },
+      {
+        value: "+34%",
+        label: "Ventas",
+        sub: "Aumento en ventas en solo 3 meses",
+      },
+      {
+        value: "100%",
+        label: "Chats respondidos",
+        sub: "Ningún chat queda sin atender",
+      },
+      {
+        value: "Control total",
+        label: "Visibilidad",
+        sub: "Del canal y de cada vendedor",
+      },
     ],
-    challengeTitle: "Un equipo sobrecargado perdiendo clientes por lentitud",
+    challengeTitle: "Sin control del canal online ni de sus vendedores",
     challengeBody:
-      "Inalco tenía un equipo de ventas sobrecargado. Los tiempos de respuesta eran lentos y muchos clientes se iban con la competencia antes de recibir una cotización. Necesitaban una forma de acelerar el proceso sin perder calidad en la atención.",
-    resultsTitle: "Más velocidad, más cierres, clientes más felices",
+      "María Soto no podía responder todos los chats que recibía y no tenía forma de saber cómo estaban funcionando sus vendedores en el canal online. La falta de visibilidad impedía mejorar la operación.",
+    challengePoints: [
+      "No podían responder todos los chats que llegaban",
+      "No tenían visibilidad de cómo funcionaban los vendedores",
+      "Sin información del rendimiento del canal online",
+    ],
+    resultsTitle: "Visibilidad completa y ventas en alza",
     resultsBody:
-      "Partsflow redujo el tiempo de respuesta en un 60%. La IA filtra y prepara cada consulta antes de que el vendedor intervenga, permitiéndoles cerrar más ventas en menos tiempo. Los clientes valoran la rapidez y Inalco se posicionó como líder en servicio.",
+      "Con Partsflow, María Soto logró responder el 100% de los chats, tener información clara de cómo va el canal y cómo atiende cada vendedor. El resultado: un aumento de 34% en ventas en solo 3 meses.",
     resultsPoints: [
-      "60% menos tiempo de respuesta por consulta",
-      "35% más ventas cerradas cada mes",
-      "98% de satisfacción de clientes",
+      "Pueden responder todos los chats sin excepción",
+      "Tienen información de cómo va el canal online",
+      "Tienen visibilidad sobre el rendimiento de cada vendedor",
+      "Aumentaron sus ventas un 34% en 3 meses",
     ],
   },
   {
@@ -104,30 +148,51 @@ export const casos: Caso[] = [
     category: "Venta de repuestos",
     company: "Repuestos del Sol",
     location: "Chile",
-    headline: "Partsflow ayudó a Repuestos del Sol a vender un 40% más",
-    metric: "Atención 24/7 sin guardia humana",
-    metricSub: "0 consultas sin atender",
+    headline:
+      "Cómo Repuestos del Sol creció sin contratar más vendedores",
+    metric: "Más ventas, mismo equipo",
+    metricSub: "Crecimiento sin sumar vendedores",
     problem:
-      "Perdían ventas los fines de semana y en horarios nocturnos — los clientes impacientes se iban con quien respondiera primero.",
+      "El marketing digital trajo más clientes de los que podían atender. Necesitaban crecer sin llenar la empresa de vendedores.",
     logo: "☀️",
+    videoUrl: "https://www.youtube.com/shorts/vOf6nZPvOTg",
     quote:
-      '"Antes perdíamos ventas los fines de semana. Ahora Partsflow filtra todo y el lunes empezamos con la mesa servida."',
-    quoteAuthor: "— Repuestos del Sol",
+      '"Partimos con WhatsApp, empezamos a hacer trabajo de marca y empezaron a llegar muchos más clientes. Ahí entramos en un problema de cómo podemos responder todo, ya que no podíamos llenarnos de vendedores. Y ahí pensamos en implementar Partsflow."',
+    quoteAuthor: "— José Ignacio, Gerente Comercial, Repuestos del Sol",
     metrics: [
-      { value: "+40%", label: "Ventas", sub: "Aumento en ventas totales" },
-      { value: "24/7", label: "Cobertura", sub: "Atención sin interrupciones" },
-      { value: "0", label: "Chats perdidos", sub: "Ninguna consulta sin atender" },
+      {
+        value: "+Ventas",
+        label: "Ecommerce propio",
+        sub: "Aumento en ventas del canal digital",
+      },
+      {
+        value: "0",
+        label: "Vendedores extra",
+        sub: "Crecieron sin contratar más",
+      },
+      {
+        value: "Data completa",
+        label: "Visibilidad",
+        sub: "De chats, vendedores y operación",
+      },
     ],
-    challengeTitle: "Ventas que se escapaban fuera del horario laboral",
+    challengeTitle: "Más clientes de los que podían atender",
     challengeBody:
-      "Repuestos del Sol perdía un porcentaje significativo de ventas fuera del horario laboral. Los fines de semana y noches, los chats se acumulaban sin respuesta. Los clientes impacientes se iban con quien respondiera primero.",
-    resultsTitle: "El lunes arrancan con la mesa servida",
+      "Repuestos del Sol empezó a hacer marketing digital y los chats se multiplicaron. Sus vendedores no daban abasto para la cantidad de consultas entrantes, pero no podían simplemente contratar más gente. Necesitaban una forma de crecer sin aumentar el equipo.",
+    challengePoints: [
+      "El marketing digital trajo más chats de los que podían manejar",
+      "Necesitaban crecer sin contratar más vendedores",
+      "No tenían data sobre los chats que llegaban",
+      "Solo funcionaban con WhatsApp",
+    ],
+    resultsTitle: "Crecimiento eficiente con el mismo equipo",
     resultsBody:
-      "Con Partsflow atendiendo 24/7, cada consulta recibe respuesta inmediata sin importar el horario. La IA filtra y prepara las cotizaciones para que el equipo de ventas arranque el lunes con todo listo. Las ventas aumentaron un 40% en los primeros dos meses.",
+      "Con Partsflow, Repuestos del Sol pudo responder más chats sin sumar vendedores. Aumentaron las ventas de su ecommerce propio y ahora tienen data completa de cómo funciona su operación y cómo atiende cada vendedor.",
     resultsPoints: [
-      "40% más ventas en los primeros dos meses",
-      "Atención 24/7 sin guardia humana",
-      "Cero consultas sin respuesta los fines de semana",
+      "Responden más chats sin contratar más vendedores",
+      "Aumentaron las ventas de su ecommerce propio",
+      "Tienen data de cómo está funcionando la operación",
+      "Tienen visibilidad de cómo atiende cada vendedor",
     ],
   },
 ];
