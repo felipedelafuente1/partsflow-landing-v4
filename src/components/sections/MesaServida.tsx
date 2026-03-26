@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
+import { motion, useMotionValue, animate } from "framer-motion";
 import { FadeUp } from "@/components/animations/FadeUp";
 import {
   Bot,
@@ -268,7 +269,7 @@ function MobileTabs({ active, onChange }: { active: number; onChange: (i: number
           className={cn(
             "flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium transition-all",
             active === i
-              ? "bg-mint-400/10 text-mint-400 border border-mint-400/20"
+              ? "bg-mint-400/10 text-mint-400 border border-mint-400/20 shadow-[0_0_10px_rgba(0,196,124,0.2)]"
               : "text-white/40 border border-transparent hover:text-white/60"
           )}
         >
@@ -278,9 +279,132 @@ function MobileTabs({ active, onChange }: { active: number; onChange: (i: number
           )}>
             {s.step}
           </span>
-          <span className="hidden sm:inline">{s.label}</span>
+          {active === i ? (
+            <span>{s.label}</span>
+          ) : (
+            <span className="hidden sm:inline">{s.label}</span>
+          )}
         </button>
       ))}
+    </div>
+  );
+}
+
+/* ─── Dot Indicator ─── */
+
+function DotIndicator({ active, count }: { active: number; count: number }) {
+  return (
+    <div className="mt-2 flex justify-center gap-1.5 lg:hidden">
+      {Array.from({ length: count }).map((_, i) => (
+        <motion.div
+          key={i}
+          className="h-1 rounded-full"
+          animate={{
+            width: active === i ? 20 : 6,
+            backgroundColor: active === i ? "#00C47C" : "rgba(255,255,255,0.15)",
+          }}
+          transition={{ type: "spring", stiffness: 300, damping: 25 }}
+        />
+      ))}
+    </div>
+  );
+}
+
+/* ─── Mobile Carousel ─── */
+
+function MobileCarousel({ activeTab, setActiveTab }: { activeTab: number; setActiveTab: (i: number) => void }) {
+  const x = useMotionValue(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [cardWidth, setCardWidth] = useState(0);
+  const gap = 16;
+  const hasHinted = useRef(false);
+  const [showHint, setShowHint] = useState(true);
+  const dragSource = useRef(false);
+
+  // Measure card width
+  useEffect(() => {
+    if (!cardRef.current) return;
+    const ro = new ResizeObserver(([entry]) => setCardWidth(entry.contentRect.width));
+    ro.observe(cardRef.current);
+    return () => ro.disconnect();
+  }, []);
+
+  // Sync carousel position when tab changes (from tab tap)
+  useEffect(() => {
+    if (!cardWidth) return;
+    if (dragSource.current) {
+      dragSource.current = false;
+      return;
+    }
+    animate(x, -activeTab * (cardWidth + gap), { type: "spring", stiffness: 300, damping: 30 });
+  }, [activeTab, cardWidth, x]);
+
+  // First-load swipe hint
+  useEffect(() => {
+    if (hasHinted.current || !cardWidth) return;
+    hasHinted.current = true;
+    const timeout = setTimeout(() => {
+      animate(x, -40, { duration: 0.4 }).then(() => {
+        animate(x, 0, { type: "spring", stiffness: 300, damping: 20 });
+      });
+    }, 1500);
+    const fadeTimeout = setTimeout(() => setShowHint(false), 4000);
+    return () => { clearTimeout(timeout); clearTimeout(fadeTimeout); };
+  }, [cardWidth, x]);
+
+  const handleDragEnd = useCallback(
+    (_: unknown, info: { velocity: { x: number }; offset: { x: number } }) => {
+      if (!cardWidth) return;
+      const threshold = cardWidth / 4;
+      let newIndex = activeTab;
+      if (info.velocity.x < -300 || info.offset.x < -threshold) {
+        newIndex = Math.min(activeTab + 1, STEPS.length - 1);
+      } else if (info.velocity.x > 300 || info.offset.x > threshold) {
+        newIndex = Math.max(activeTab - 1, 0);
+      }
+      dragSource.current = true;
+      setActiveTab(newIndex);
+      animate(x, -newIndex * (cardWidth + gap), { type: "spring", stiffness: 300, damping: 30 });
+    },
+    [activeTab, cardWidth, setActiveTab, x]
+  );
+
+  return (
+    <div ref={containerRef} className="overflow-hidden lg:hidden">
+      <motion.div
+        drag="x"
+        style={{ x, gap, paddingLeft: "calc((100vw - min(85vw, 384px)) / 2)" }}
+        dragConstraints={{
+          left: cardWidth ? -(STEPS.length - 1) * (cardWidth + gap) : 0,
+          right: 0,
+        }}
+        dragElastic={0.15}
+        dragDirectionLock
+        onDragEnd={handleDragEnd}
+        className="flex cursor-grab active:cursor-grabbing"
+      >
+        {STEPS.map((s, i) => (
+          <div
+            key={s.step}
+            ref={i === 0 ? cardRef : undefined}
+            className="w-[85vw] max-w-sm flex-shrink-0"
+          >
+            <StepNumber n={s.step} label={s.label} />
+            <s.Component />
+          </div>
+        ))}
+      </motion.div>
+
+      {/* Swipe hint */}
+      <motion.p
+        className="mt-3 flex items-center justify-center gap-1 text-[11px] text-white/30"
+        initial={{ opacity: 1 }}
+        animate={{ opacity: showHint ? 1 : 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        Desliza para ver más <ChevronRight size={12} />
+      </motion.p>
     </div>
   );
 }
@@ -289,7 +413,6 @@ function MobileTabs({ active, onChange }: { active: number; onChange: (i: number
 
 export function MesaServida() {
   const [activeTab, setActiveTab] = useState(0);
-  const ActiveComponent = STEPS[activeTab].Component;
 
   return (
     <section className="relative bg-black py-12 sm:py-24">
@@ -311,20 +434,16 @@ export function MesaServida() {
           </p>
         </FadeUp>
 
-        {/* Mobile: Tabs */}
+        {/* Mobile: Tabs + Dots */}
         <FadeUp delay={0.1} className="mb-5 lg:hidden">
           <MobileTabs active={activeTab} onChange={setActiveTab} />
+          <DotIndicator active={activeTab} count={STEPS.length} />
         </FadeUp>
 
-        {/* Mobile: Active step content */}
-        <div className="lg:hidden">
-          <FadeUp delay={0.15}>
-            <div className="mx-auto max-w-sm">
-              <StepNumber n={STEPS[activeTab].step} label={STEPS[activeTab].label} />
-              <ActiveComponent />
-            </div>
-          </FadeUp>
-        </div>
+        {/* Mobile: Swipeable Carousel */}
+        <FadeUp delay={0.15}>
+          <MobileCarousel activeTab={activeTab} setActiveTab={setActiveTab} />
+        </FadeUp>
 
         {/* Desktop: 3 columns */}
         <div className="hidden lg:grid lg:grid-cols-[1fr_auto_1fr_auto_1fr] lg:items-start lg:gap-4">
