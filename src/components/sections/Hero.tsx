@@ -4,13 +4,35 @@ import { FadeUp } from "@/components/animations/FadeUp";
 import { RetroGrid } from "@/components/ui/retro-grid";
 import { WhatsAppSimulator } from "@/components/sections/WhatsAppSimulator";
 import { LogoCloud } from "@/components/sections/LogoCloud";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight, Play, X } from "lucide-react";
 import { useBookingModal } from "@/context/BookingModalContext";
+import { useState, useCallback, useEffect } from "react";
 
 export function Hero() {
   const { openModal } = useBookingModal();
+  const [videoOpen, setVideoOpen] = useState(false);
+  const closeVideo = useCallback(() => setVideoOpen(false), []);
+
+  useEffect(() => {
+    if (!videoOpen) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeVideo();
+    };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [videoOpen, closeVideo]);
+
+  useEffect(() => {
+    if (videoOpen) {
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = "";
+      };
+    }
+  }, [videoOpen]);
 
   return (
+    <>
     <section className="relative min-h-0 sm:min-h-screen overflow-hidden bg-background pt-20 pb-8 sm:pt-24 sm:pb-10">
       {/* Background Effects */}
       <div className="pointer-events-none absolute inset-0">
@@ -69,7 +91,7 @@ export function Hero() {
                 />
               </button>
               <button
-                onClick={openModal}
+                onClick={() => setVideoOpen(true)}
                 className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-8 py-3.5 text-sm font-medium text-foreground transition-all hover:border-white/20 hover:bg-white/[0.06]"
               >
                 <Play size={14} />
@@ -92,5 +114,36 @@ export function Hero() {
         </div>
       </div>
     </section>
+
+    {/* Video Demo Modal */}
+    {videoOpen && (
+      <div
+        className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm"
+        onClick={closeVideo}
+      >
+        <button
+          onClick={closeVideo}
+          className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+          aria-label="Cerrar video"
+        >
+          <X size={20} />
+        </button>
+
+        <div
+          className="relative w-[min(900px,90vw)]"
+          style={{ aspectRatio: "16/9" }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <iframe
+            src="https://www.youtube.com/embed/-HQsGHuBt5Y?autoplay=1&rel=0"
+            title="Demo Partsflow"
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+            className="h-full w-full rounded-2xl"
+          />
+        </div>
+      </div>
+    )}
+    </>
   );
 }
