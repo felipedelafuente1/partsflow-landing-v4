@@ -45,6 +45,8 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
   const [step, setStep] = useState<1 | 2>(1);
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [mounted, setMounted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -79,15 +81,38 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
     setFormData((prev) => ({ ...prev, [field]: value }));
   }
 
-  function handleSubmitStep1(e: FormEvent) {
+  async function handleSubmitStep1(e: FormEvent) {
     e.preventDefault();
+    if (isSubmitting) return;
 
-    trackEvent("demo_form_submit", {
-      chat_volume: formData.chatVolume,
-      erp: formData.erp,
-    });
+    setIsSubmitting(true);
+    setSubmitError(null);
 
-    setStep(2);
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        throw new Error(data?.error || "Error al enviar el formulario");
+      }
+
+      trackEvent("demo_form_submit", {
+        chat_volume: formData.chatVolume,
+        erp: formData.erp,
+      });
+
+      setStep(2);
+    } catch (err) {
+      setSubmitError(
+        err instanceof Error ? err.message : "Error al enviar el formulario"
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   if (!mounted) return null;
@@ -141,6 +166,8 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
                       formData={formData}
                       updateField={updateField}
                       onSubmit={handleSubmitStep1}
+                      isSubmitting={isSubmitting}
+                      submitError={submitError}
                     />
                   </motion.div>
                 ) : (
@@ -170,10 +197,14 @@ function StepOneForm({
   formData,
   updateField,
   onSubmit,
+  isSubmitting,
+  submitError,
 }: {
   formData: FormData;
   updateField: (field: keyof FormData, value: string) => void;
   onSubmit: (e: FormEvent) => void;
+  isSubmitting: boolean;
+  submitError: string | null;
 }) {
   return (
     <form onSubmit={onSubmit} className="space-y-5">
@@ -289,16 +320,24 @@ function StepOneForm({
         />
       </div>
 
+      {/* Error message */}
+      {submitError && (
+        <p className="text-sm text-red-400">{submitError}</p>
+      )}
+
       {/* Submit Button with BorderBeam */}
       <button
         type="submit"
-        className="group relative mt-2 flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-mint-400 px-6 py-3.5 text-sm font-semibold text-black transition-all hover:bg-mint-300 hover:shadow-[0_0_30px_rgba(74,222,128,0.3)]"
+        disabled={isSubmitting}
+        className="group relative mt-2 flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-mint-400 px-6 py-3.5 text-sm font-semibold text-black transition-all hover:bg-mint-300 hover:shadow-[0_0_30px_rgba(74,222,128,0.3)] disabled:opacity-60 disabled:cursor-not-allowed"
       >
-        Continuar
-        <MoveRight
-          size={16}
-          className="transition-transform group-hover:translate-x-1"
-        />
+        {isSubmitting ? "Enviando..." : "Continuar"}
+        {!isSubmitting && (
+          <MoveRight
+            size={16}
+            className="transition-transform group-hover:translate-x-1"
+          />
+        )}
         <BorderBeam size={120} duration={3} colorFrom="#4ade80" colorTo="#3b82f6" />
       </button>
     </form>
