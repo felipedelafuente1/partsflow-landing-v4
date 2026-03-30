@@ -74,7 +74,7 @@ export async function POST(request: Request) {
       chats_dia: parseChatVolume(body.chatVolume),
       notas: buildNotas(body.erp, body.marketing),
       fuente: "inbound_web" as const,
-      etapa: "nuevo",
+      etapa: "inbound",
     };
 
     const { data, error } = await getSupabase()
